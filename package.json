@@ -1,0 +1,10 @@
+{
+  "name": "PetMine",
+  "uuid": "1359e5a0-860a-4328-a8d9-1283333d6aa6",
+  "creator": {
+    "version": "3.8.5"
+  },
+  "dependencies": {
+    "@cocos/creator-types": "^3.8.5"
+  }
+}

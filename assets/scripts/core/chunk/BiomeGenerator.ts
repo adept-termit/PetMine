@@ -1,4 +1,4 @@
-import {_decorator, Node, Vec3, MeshRenderer, MeshCollider, utils} from 'cc';
+import {_decorator, Node, Vec3, MeshRenderer, MeshCollider, utils,tween} from 'cc';
 
 import {BiomeType, BlockTypeId, Rarity, TBlocksIdByBiomeType, worldData} from "db://assets/scripts/core/chunk/world";
 import {ChunkData} from "db://assets/scripts/core/chunk/ChunkData";
@@ -109,13 +109,19 @@ export class BiomeGenerator {
         let chunkData: ChunkData = worldData.chunkBiomeDictionary.get(biomeType);
 
         if (chunkData.blocksDictionary.has(localPositionInChunk.toString())) {
-            chunkData.blocksDictionary.delete(localPositionInChunk.toString())
+          //  chunkData.blocksDictionary.delete(localPositionInChunk.toString())
 
             const customPos = localPositionInChunk.add(new Vec3(0.5, 0.5, 0.5))
             const blockToDelete = chunkData.chunkNode.getChildByName(customPos.toString());
 
             if (blockToDelete) {
-                blockToDelete.destroy();
+                tween(blockToDelete)
+                    .to(0.1, { scale: new Vec3(1.2, 0.8, 1.2), eulerAngles: new Vec3(4, 0, 4) }) // Растягивание и наклон
+                    .to(0.1, { scale: new Vec3(0.8, 1.2, 0.8), eulerAngles: new Vec3(-4, 0, -4) }, { easing: "sineInOut" }) // Сжатие с обратным наклоном
+                    .to(0.1, { scale: new Vec3(1, 1, 1), eulerAngles: new Vec3(0, 0, 0) }, { easing: "sineIn" }) // Возврат к нормальному состоянию
+                    // .call(() => blockToDelete.destroy())
+                    .start();
+                // blockToDelete.destroy();
             }
 
             if (chunkData.blocksDictionary.size === 0) {
@@ -167,44 +173,30 @@ export class BiomeGenerator {
     }
 
     private generateBlockTypeIdPosInChunk(y: number, blocksIdByBiomeType: TBlocksIdByBiomeType) {
-        let blockInfo = new BlockInfo();
-        let randValue = Math.ceil(Math.random() * 100);
+        const blockInfo = new BlockInfo();
+        const randValue = Math.random() * 100;
         let blocksMeshStatus = false;
 
         if (y <= 10) {
-            if (randValue < 40) {
-                blockInfo.blockId = this.getRandomBlock(blocksIdByBiomeType[Rarity.Legendary]);
-                blockInfo.uvTexture = null
-                blocksMeshStatus = true;
-            } else if (randValue < 75) {
-                blockInfo.blockId = this.getRandomBlock(blocksIdByBiomeType[Rarity.Rare]);
-                blockInfo.uvTexture = null
-                blocksMeshStatus = true;
-            } else {
-                blockInfo.blockId = this.getRandomBlock(blocksIdByBiomeType[Rarity.Common]);
-                blockInfo.uvTexture = worldData.getUvTextureByBlockTypeId(blockInfo.blockId)
-            }
+            blockInfo.blockId = randValue < 40 ? this.getRandomBlock(blocksIdByBiomeType[Rarity.Legendary]) :
+                randValue < 75 ? this.getRandomBlock(blocksIdByBiomeType[Rarity.Rare]) :
+                    this.getRandomBlock(blocksIdByBiomeType[Rarity.Common]);
+            blocksMeshStatus = randValue < 75;
         } else if (y <= 20) {
-            if (randValue < 30) {
-                blockInfo.blockId = this.getRandomBlock(blocksIdByBiomeType[Rarity.Rare]);
-                blockInfo.uvTexture = null
-                blocksMeshStatus = true;
-            } else {
-                blockInfo.blockId = this.getRandomBlock(blocksIdByBiomeType[Rarity.Common]);
-                blockInfo.uvTexture = worldData.getUvTextureByBlockTypeId(blockInfo.blockId)
-            }
+            blockInfo.blockId = randValue < 30 ? this.getRandomBlock(blocksIdByBiomeType[Rarity.Rare]) :
+                this.getRandomBlock(blocksIdByBiomeType[Rarity.Common]);
+            blocksMeshStatus = randValue < 30;
         } else {
             blockInfo.blockId = this.getRandomBlock(blocksIdByBiomeType[Rarity.Common]);
-            blockInfo.uvTexture = worldData.getUvTextureByBlockTypeId(blockInfo.blockId)
         }
 
-        return {blockInfo, blocksMeshStatus};
+        blockInfo.uvTexture = blocksMeshStatus ? null : worldData.getUvTextureByBlockTypeId(blockInfo.blockId);
+        return { blockInfo, blocksMeshStatus };
     }
 
-    private getRandomBlock(blocks: Array<BlockTypeId>) {
-        const randomIndex = Math.floor(Math.random() * blocks.length);
 
-        return blocks[randomIndex];
+    private getRandomBlock(blocks: BlockTypeId[]): BlockTypeId {
+        return blocks[Math.floor(Math.random() * blocks.length)];
     }
 
 }

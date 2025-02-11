@@ -1165,7 +1165,7 @@
     "propertyPath": [
       "chunkSize"
     ],
-    "value": 1
+    "value": 3
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1175,7 +1175,7 @@
     "propertyPath": [
       "chunkSizeHeight"
     ],
-    "value": 5
+    "value": 25
   },
   {
     "__type__": "cc.PrefabInfo",

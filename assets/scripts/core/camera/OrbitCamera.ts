@@ -7,7 +7,7 @@ import {
     CCFloat,
     Vec3,
     geometry,
-    PhysicsSystem
+    PhysicsSystem, EPhysicsDrawFlags
 } from 'cc';
 
 import {IOrbitCameraInput} from "db://assets/scripts/core/camera/IOrbitCameraInput";
@@ -64,6 +64,8 @@ export class OrbitCamera extends Component {
     }
 
     start() {
+        PhysicsSystem.instance.debugDrawFlags = EPhysicsDrawFlags.WIRE_FRAME | EPhysicsDrawFlags.AABB;
+
         this._obstacleAvoidanceDistance = this.distanceMax;
         this._currentInput = sys.isMobile === true ? new OrbitCameraInputMouse(this) : new OrbitCameraInputMouse(this);
         this._currentInput.enable();

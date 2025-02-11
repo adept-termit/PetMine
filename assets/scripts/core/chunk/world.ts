@@ -1,14 +1,14 @@
-import {ChunkInfo} from "db://assets/scripts/core/chunk/ChunkInfo";
 import {ChunkData} from "db://assets/scripts/core/chunk/ChunkData";
 
-export enum BlockType {
-    Dirt,
-    Stone,
-    Stone_with_white_crystal,
-    Stone_with_gold_crystal,
-    Stone_with_diamond_crystal,
-    Stone_with_red_crystal,
-    Stone_with_purple_crystal,
+export enum BlockTypeId {
+    Dirt = 'dirt',
+    Stone = 'stone',
+    Sand = 'sand',
+    Stone_with_white_crystal = 'stone_with_white_crystal',
+    Stone_with_gold_crystal = 'stone_with_gold_crystal',
+    Stone_with_diamond_crystal = 'stone_with_diamond_crystal',
+    Stone_with_red_crystal = 'stone_with_red_crystal',
+    Stone_with_purple_crystal = 'stone_with_purple_crystal',
 }
 
 export enum BiomeType {
@@ -24,10 +24,16 @@ export enum BlockPriceType {
     Crystal,
 }
 
-const enum Rarity {
+export enum Rarity {
     Common = 'common',
-    Epic = 'epic',
+    Rare = 'rare',
     Legendary = 'legendary'
+}
+
+export type TBlocksIdByBiomeType = {
+    [Rarity.Common]: BlockTypeId[],
+    [Rarity.Rare]: BlockTypeId[],
+    [Rarity.Legendary]: BlockTypeId[],
 }
 
 export class WorldData {
@@ -39,6 +45,89 @@ export class WorldData {
 
     get chunkBiomeDictionary(): Map<BiomeType, ChunkData> {
         return this._chunkBiomeDictionary;
+    }
+
+    getBlocksIdByBiomeType(biomeType: BiomeType): TBlocksIdByBiomeType {
+        switch (biomeType) {
+            case BiomeType.Forest:
+                return {
+                    [Rarity.Common]: [
+                        BlockTypeId.Dirt,
+                        BlockTypeId.Stone
+                    ],
+                    [Rarity.Rare]: [
+                        BlockTypeId.Stone_with_red_crystal,
+                        BlockTypeId.Stone_with_white_crystal
+                    ],
+                    [Rarity.Legendary]: [
+                        BlockTypeId.Stone_with_gold_crystal,
+                        BlockTypeId.Stone_with_purple_crystal
+                    ]
+                }
+            case BiomeType.DarkForest:
+                return {
+                    [Rarity.Common]: [
+                        BlockTypeId.Dirt,
+                        BlockTypeId.Stone
+                    ],
+                    [Rarity.Rare]: [
+                        BlockTypeId.Stone_with_red_crystal,
+                        BlockTypeId.Stone_with_white_crystal
+                    ],
+                    [Rarity.Legendary]: [
+                        BlockTypeId.Stone_with_gold_crystal,
+                        BlockTypeId.Stone_with_purple_crystal
+                    ]
+                }
+            case BiomeType.Pyramids:
+                return {
+                    [Rarity.Common]: [
+                        BlockTypeId.Dirt,
+                        BlockTypeId.Stone
+                    ],
+                    [Rarity.Rare]: [
+                        BlockTypeId.Stone_with_red_crystal,
+                        BlockTypeId.Stone_with_white_crystal
+                    ],
+                    [Rarity.Legendary]: [
+                        BlockTypeId.Stone_with_gold_crystal,
+                        BlockTypeId.Stone_with_purple_crystal
+                    ]
+                }
+            case BiomeType.Beach:
+                return {
+                    [Rarity.Common]: [
+                        BlockTypeId.Dirt,
+                        BlockTypeId.Stone
+                    ],
+                    [Rarity.Rare]: [
+                        BlockTypeId.Stone_with_red_crystal,
+                        BlockTypeId.Stone_with_white_crystal
+                    ],
+                    [Rarity.Legendary]: [
+                        BlockTypeId.Stone_with_gold_crystal,
+                        BlockTypeId.Stone_with_purple_crystal
+                    ]
+                }
+        }
+    }
+
+    getUvTextureByBlockTypeId(blockId: BlockTypeId)
+    {
+        switch (blockId) {
+            case BlockTypeId.Dirt:
+                return [0,1];
+            case BlockTypeId.Stone:
+                return [0,2];
+            case BlockTypeId.Stone_with_red_crystal:
+                return [0,3];
+            case BlockTypeId.Stone_with_white_crystal:
+                return [0,4];
+            case BlockTypeId.Stone_with_gold_crystal:
+                return [0,5];
+            case BlockTypeId.Stone_with_purple_crystal:
+                return [0,6];
+        }
     }
 
 }

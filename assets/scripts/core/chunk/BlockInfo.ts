@@ -7,12 +7,21 @@ const {ccclass} = _decorator;
 @ccclass('BlockInfo')
 export class BlockInfo {
     private _blockPos: Vec3;
+    private _blockCustomPos: Vec3;
     private _priceType: BlockPriceType;
     private _price: number;
     private _hp: number;
     private _chanceToDropCrystal: number;
     private _blockId: BlockTypeId;
     private _uvTexture?: number[];
+
+    get blockCustomPos(): Vec3 {
+        return this._blockCustomPos;
+    }
+
+    set blockCustomPos(value: Vec3) {
+        this._blockCustomPos = value;
+    }
 
     get uvTexture(): number[] {
         return this._uvTexture;

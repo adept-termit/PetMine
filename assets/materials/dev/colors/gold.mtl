@@ -10,7 +10,9 @@
   },
   "_techIdx": 0,
   "_defines": [
-    {},
+    {
+      "USE_INSTANCING": true
+    },
     {},
     {},
     {},
@@ -77,9 +79,9 @@
     {
       "mainColor": {
         "__type__": "cc.Color",
-        "r": 0,
-        "g": 93,
-        "b": 233,
+        "r": 255,
+        "g": 215,
+        "b": 0,
         "a": 255
       }
     },

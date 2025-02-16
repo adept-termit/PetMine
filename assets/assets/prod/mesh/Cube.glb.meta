@@ -2,72 +2,18 @@
   "ver": "2.3.13",
   "importer": "gltf",
   "imported": true,
-  "uuid": "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4",
+  "uuid": "99662341-404b-4567-b333-a2dcdd41e756",
   "files": [],
   "subMetas": {
-    "93ea0": {
-      "importer": "gltf-mesh",
-      "uuid": "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@93ea0",
-      "displayName": "",
-      "id": "93ea0",
-      "name": "Cube4.mesh",
-      "userData": {
-        "gltfIndex": 0,
-        "triangleCount": 1404
-      },
-      "ver": "1.1.1",
-      "imported": true,
-      "files": [
-        ".bin",
-        ".json"
-      ],
-      "subMetas": {}
-    },
-    "75f72": {
-      "importer": "gltf-mesh",
-      "uuid": "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@75f72",
-      "displayName": "",
-      "id": "75f72",
-      "name": "Cube3.mesh",
-      "userData": {
-        "gltfIndex": 1,
-        "triangleCount": 1404
-      },
-      "ver": "1.1.1",
-      "imported": true,
-      "files": [
-        ".bin",
-        ".json"
-      ],
-      "subMetas": {}
-    },
-    "6ea90": {
-      "importer": "gltf-mesh",
-      "uuid": "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@6ea90",
-      "displayName": "",
-      "id": "6ea90",
-      "name": "Cube2.mesh",
-      "userData": {
-        "gltfIndex": 2,
-        "triangleCount": 1404
-      },
-      "ver": "1.1.1",
-      "imported": true,
-      "files": [
-        ".bin",
-        ".json"
-      ],
-      "subMetas": {}
-    },
     "9494a": {
       "importer": "gltf-mesh",
-      "uuid": "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@9494a",
+      "uuid": "99662341-404b-4567-b333-a2dcdd41e756@9494a",
       "displayName": "",
       "id": "9494a",
       "name": "Cube1.mesh",
       "userData": {
-        "gltfIndex": 3,
-        "triangleCount": 1452
+        "gltfIndex": 0,
+        "triangleCount": 492
       },
       "ver": "1.1.1",
       "imported": true,
@@ -79,7 +25,7 @@
     },
     "9d327": {
       "importer": "gltf-scene",
-      "uuid": "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@9d327",
+      "uuid": "99662341-404b-4567-b333-a2dcdd41e756@9d327",
       "displayName": "",
       "id": "9d327",
       "name": "Cube.prefab",
@@ -116,16 +62,13 @@
     },
     "assetFinder": {
       "meshes": [
-        "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@93ea0",
-        "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@75f72",
-        "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@6ea90",
-        "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@9494a"
+        "99662341-404b-4567-b333-a2dcdd41e756@9494a"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "9d68fe7f-87d9-49a6-8d93-a3d72ad10fe4@9d327"
+        "99662341-404b-4567-b333-a2dcdd41e756@9d327"
       ]
     }
   }

@@ -10,7 +10,10 @@
   },
   "_techIdx": 0,
   "_defines": [
-    {},
+    {
+      "USE_INSTANCING": true,
+      "USE_ALBEDO_MAP": true
+    },
     {},
     {},
     {},
@@ -77,9 +80,9 @@
     {
       "mainColor": {
         "__type__": "cc.Color",
-        "r": 233,
-        "g": 0,
-        "b": 0,
+        "r": 206,
+        "g": 206,
+        "b": 206,
         "a": 255
       }
     },

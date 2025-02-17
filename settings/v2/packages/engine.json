@@ -108,10 +108,10 @@
         "_value": false
       },
       "geometry-renderer": {
-        "_value": true
+        "_value": false
       },
       "debug-renderer": {
-        "_value": true
+        "_value": false
       },
       "particle-2d": {
         "_value": true
@@ -188,9 +188,7 @@
       "audio",
       "base",
       "custom-pipeline",
-      "debug-renderer",
       "dragon-bones",
-      "geometry-renderer",
       "gfx-webgl",
       "intersection-2d",
       "light-probe",

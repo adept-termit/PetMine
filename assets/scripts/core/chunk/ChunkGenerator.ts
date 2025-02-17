@@ -5,7 +5,7 @@ import {ChunkData} from "db://assets/scripts/core/chunk/ChunkData";
 
 import * as cc from "cc";
 import {BlockInfo} from "db://assets/scripts/core/chunk/BlockInfo";
-import {blockCreator} from "db://assets/scripts/core/chunk/BlockCreator";
+import {poolService} from "db://assets/scripts/core/utils/PoolService";
 
 const {ccclass, property} = _decorator;
 
@@ -16,37 +16,31 @@ export class ChunkGenerator extends Component {
     @property({type: Node}) instanceCube: Node;
     @property({type: cc.Enum(BiomeType)}) biomeType: BiomeType = BiomeType.Forest
 
+    public blocks = [];
+    private customOffset = new Vec3(0.5, 0.5, 0.5)
+    private blockCustomPos = new Vec3()
+
+    private twinScaleTo = new Vec3(1.2, 0.8, 1.2)
+    private twinEulerAnglesTo = new Vec3(4, 0, 4)
+
+    private twinBackScale = new Vec3(0.8, 1.2, 0.8)
+    private twinBackEulerAngles = new Vec3(-4, 0, -4)
+
+    private twinScaleDefault = new Vec3(1, 1, 1)
+    private twinEulerAnglesDefault = new Vec3(0, 0, 0)
+
+
     onLoad() {
-        //
-        // const newPool = new Pool<Node>(
-        //     () => instantiate(this.instanceCube.getChildByName(BlockTypeId.Stone_with_purple_crystal)),
-        //     5
-        // );
-        //
-        // for (let i = 0; i < 5; i++) {
-        //     const asd = newPool.alloc();
-        //     asd.setPosition(new Vec3(i, i * 2, i))
-        //     this.node.addChild(asd)
-        // }
-        //
-        // for (let i = 0; i < this.node.children.length; i++) {
-        //     const child = this.node.children[i];
-        //     child.active = false
-        //     newPool.free(child)
-        // }
-        // for (let i = 0; i < 5; i++) {
-        //     const asd = newPool.alloc();
-        //     asd.setPosition(new Vec3(i, i * 2, i))
-        //     asd.active = true
-        //     this.node.addChild(asd)
-        // }
-        //
-        // for (let i = 0; i < this.node.children.length; i++) {
-        //     const child = this.node.children[i];
-        //     child.active = false
-        //     newPool.free(child)
-        // }
-        // console.log(newPool)
+        const blockTypes = [
+            BlockTypeId.Dirt,
+            BlockTypeId.Stone,
+            BlockTypeId.Stone_with_white_crystal,
+            BlockTypeId.Stone_with_gold_crystal,
+            BlockTypeId.Stone_with_red_crystal,
+            BlockTypeId.Stone_with_purple_crystal,
+        ];
+
+        poolService.init(this.instanceCube, blockTypes);
 
         this.init()
     }
@@ -67,29 +61,97 @@ export class ChunkGenerator extends Component {
     private generateBlockTypePosInChunk(chunkData: ChunkData) {
         const blocksIdByBiomeType: TBlocksIdByBiomeType = worldData.getBlocksIdByBiomeType(this.biomeType);
 
-        blockCreator.init(this.biomeType);
         for (let y = 0; y < chunkData.chunkSizeHeight; y++) {
             for (let x = 0; x < chunkData.chunkSize; x++) {
                 for (let z = 0; z < chunkData.chunkSize; z++) {
 
-                    let blockPosInChunk: Vec3 = new Vec3(x, y, z);
                     let blockInfo = this.generateBlockTypeIdPosInChunk(y, blocksIdByBiomeType);
 
-                    blockInfo.blockPos = blockPosInChunk;
-                    blockInfo.blockCustomPos = new Vec3(x, y, z).add(new Vec3(0.5, 0.5, 0.5));
+                    blockInfo.blockCustomPos = this.blockCustomPos.set(x, y, z).add(this.customOffset);
 
-                    chunkData.pushBlocksDictionary(blockPosInChunk.toString(), blockInfo);
-
-                    const block = blockCreator.instanceBlock(blockInfo, this.instanceCube)
+                    const entity = poolService.allocBlock(blockInfo.blockId);
+                    entity.setPosition(blockInfo.blockCustomPos)
+                    entity.setParent(this.node);
 
                     if (y >= chunkData.chunkSizeHeight - 2) {
-                        block.active = true
+                        entity.active = true
+
                     }
 
-                    chunkData.chunkNode.addChild(block)
+                    if (!this.blocks[blockInfo.blockCustomPos.y]) this.blocks[blockInfo.blockCustomPos.y] = [];
+                    if (!this.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x]) this.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x] = [];
+                    this.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x][blockInfo.blockCustomPos.z] = entity;
+
+                    blockInfo.blockNode = entity
+
+                    chunkData.pushBlocksDictionary(blockInfo.blockCustomPos.toString(), blockInfo);
                 }
             }
         }
+    }
+
+    reGenerateChunk(localPositionInChunk: Vec3) {
+        let chunkData: ChunkData = worldData.chunkBiomeDictionary.get(this.biomeType);
+        localPositionInChunk.add(this.customOffset);
+        let block = chunkData.blocksDictionary.get(localPositionInChunk.toString())
+
+        if (block) {
+            let blockToDelete = block.blockNode
+            if (blockToDelete) {
+                tween(blockToDelete)
+                    .to(0.1, {
+                        scale: this.twinScaleTo,
+                        eulerAngles:  this.twinEulerAnglesTo,
+                    }) // Растягивание и наклон
+                    .to(0.1, {
+                        scale: this.twinBackScale,
+                        eulerAngles:  this.twinBackEulerAngles,
+                    }, {easing: "sineInOut"}) // Сжатие с обратным наклоном
+                    .to(0.1, {
+                        scale: this.twinScaleDefault,
+                        eulerAngles:  this.twinEulerAnglesDefault,
+                    }, {easing: "sineIn"}) // Возврат к нормальному состоянию
+                    .call(() => {
+                        blockToDelete.removeFromParent();
+                        poolService.freeBlock(block.blockId, blockToDelete)
+                        chunkData.blocksDictionary.delete(localPositionInChunk.toString())
+
+                        delete this.blocks[localPositionInChunk.y][localPositionInChunk.x][localPositionInChunk.z];
+
+                    })
+                    .start();
+            }
+
+            if (chunkData.blocksDictionary.size === 0) {
+                this.init()
+            }
+
+            this.spawnAroundBlock(localPositionInChunk)
+        }
+    }
+
+    private getBlockAtPosition(x: number, y: number, z: number): Node | undefined {
+        return this.blocks[y]?.[x]?.[z];
+    }
+
+    private spawnAroundBlock(localPositionInChunk: Vec3) {
+        const { x, y, z } = localPositionInChunk;
+
+        // Список направлений
+        const directions = [
+            [1, 0, 0],  // Вправо
+            [-1, 0, 0], // Влево
+            [0, 1, 0],  // Вверх
+            [0, -1, 0], // Вниз
+            [0, 0, 1],  // Вперед
+            [0, 0, -1], // Назад
+        ];
+
+        // Активируем соседние блоки, если они существуют
+        directions.forEach(([dx, dy, dz]) => {
+            const block = this.getBlockAtPosition(x + dx, y + dy, z + dz);
+            if (block) block.active = true;
+        });
     }
 
     private generateBlockTypeIdPosInChunk(y: number, blocksIdByBiomeType: TBlocksIdByBiomeType) {
@@ -114,54 +176,6 @@ export class ChunkGenerator extends Component {
         return blocks[Math.floor(Math.random() * blocks.length)];
     }
 
-    reGenerateChunk(localPositionInChunk: Vec3) {
-        let chunkData: ChunkData = worldData.chunkBiomeDictionary.get(this.biomeType);
-
-        if (chunkData.blocksDictionary.has(localPositionInChunk.toString())) {
-            chunkData.blocksDictionary.delete(localPositionInChunk.toString())
-
-            const customPos = localPositionInChunk.add(new Vec3(0.5, 0.5, 0.5))
-            const blockToDelete = chunkData.chunkNode.getChildByName(customPos.toString());
-
-            if (blockToDelete) {
-                tween(blockToDelete)
-                    .to(0.1, {scale: new Vec3(1.2, 0.8, 1.2), eulerAngles: new Vec3(4, 0, 4)}) // Растягивание и наклон
-                    .to(0.1, {
-                        scale: new Vec3(0.8, 1.2, 0.8),
-                        eulerAngles: new Vec3(-4, 0, -4)
-                    }, {easing: "sineInOut"}) // Сжатие с обратным наклоном
-                    .to(0.1, {
-                        scale: new Vec3(1, 1, 1),
-                        eulerAngles: new Vec3(0, 0, 0)
-                    }, {easing: "sineIn"}) // Возврат к нормальному состоянию
-                    .call(() => blockToDelete.destroy())
-                    .start();
-                // blockToDelete.destroy();
-            }
-
-            if (chunkData.blocksDictionary.size === 0) {
-                this.init()
-            }
-
-            const directions = {
-                right: {x: customPos.x + 1, y: customPos.y, z: customPos.z},
-                left: {x: customPos.x - 1, y: customPos.y, z: customPos.z},
-                up: {x: customPos.x, y: customPos.y + 1, z: customPos.z},
-                down: {x: customPos.x, y: customPos.y - 1, z: customPos.z},
-                front: {x: customPos.x, y: customPos.y, z: customPos.z + 1},
-                back: {x: customPos.x, y: customPos.y, z: customPos.z - 1},
-            };
-
-
-            Object.values(directions).forEach(coordinates => {
-                const block = chunkData.chunkNode.getChildByName((new Vec3(coordinates.x, coordinates.y, coordinates.z).toString()))
-                if (block) {
-                    block.active = true;
-                }
-            });
-        }
-    }
-
     start() {
     }
 
@@ -169,64 +183,3 @@ export class ChunkGenerator extends Component {
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

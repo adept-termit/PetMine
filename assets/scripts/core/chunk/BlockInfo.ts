@@ -1,4 +1,4 @@
-import {_decorator, Vec3} from 'cc';
+import {_decorator, Vec3,Node} from 'cc';
 
 import {BlockPriceType, BlockTypeId} from "db://assets/scripts/core/chunk/world";
 
@@ -13,7 +13,16 @@ export class BlockInfo {
     private _hp: number;
     private _chanceToDropCrystal: number;
     private _blockId: BlockTypeId;
-    private _uvTexture?: number[];
+    private _blockNode: Node;
+
+
+    get blockNode(): Node {
+        return this._blockNode;
+    }
+
+    set blockNode(value: Node) {
+        this._blockNode = value;
+    }
 
     get blockCustomPos(): Vec3 {
         return this._blockCustomPos;
@@ -21,14 +30,6 @@ export class BlockInfo {
 
     set blockCustomPos(value: Vec3) {
         this._blockCustomPos = value;
-    }
-
-    get uvTexture(): number[] {
-        return this._uvTexture;
-    }
-
-    set uvTexture(value: number[]) {
-        this._uvTexture = value;
     }
 
     get blockPos(): Vec3 {

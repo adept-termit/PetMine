@@ -11,10 +11,18 @@ export class BlockInfo {
     private _priceType: BlockPriceType;
     private _price: number;
     private _hp: number;
+    private _alreadyWasHit: boolean;
     private _chanceToDropCrystal: number;
     private _blockId: BlockTypeId;
     private _blockNode: Node;
 
+    get alreadyWasHit(): boolean {
+        return this._alreadyWasHit;
+    }
+
+    set alreadyWasHit(value: boolean) {
+        this._alreadyWasHit = value;
+    }
 
     get blockNode(): Node {
         return this._blockNode;

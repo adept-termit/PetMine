@@ -112,6 +112,20 @@ export class WorldData {
         }
     }
 
+    getHpByBlockType(blockId: BlockTypeId){
+        switch (blockId) {
+            case BlockTypeId.Dirt:
+            case BlockTypeId.Stone:
+                return 1;
+            case BlockTypeId.Stone_with_red_crystal:
+            case BlockTypeId.Stone_with_white_crystal:
+                return 2;
+            case BlockTypeId.Stone_with_gold_crystal:
+            case BlockTypeId.Stone_with_purple_crystal:
+                return 3;
+        }
+    }
+
     getUvTextureByBlockTypeId(blockId: BlockTypeId)
     {
         switch (blockId) {
@@ -129,7 +143,6 @@ export class WorldData {
                 return [0,6];
         }
     }
-
 }
 
 export const worldData = new WorldData();

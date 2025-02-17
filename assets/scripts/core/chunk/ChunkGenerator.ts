@@ -31,16 +31,14 @@ export class ChunkGenerator extends Component {
 
 
     onLoad() {
-        const blockTypes = [
+        poolService.init(this.instanceCube, [
             BlockTypeId.Dirt,
             BlockTypeId.Stone,
             BlockTypeId.Stone_with_white_crystal,
             BlockTypeId.Stone_with_gold_crystal,
             BlockTypeId.Stone_with_red_crystal,
             BlockTypeId.Stone_with_purple_crystal,
-        ];
-
-        poolService.init(this.instanceCube, blockTypes);
+        ]);
 
         this.init()
     }
@@ -68,6 +66,7 @@ export class ChunkGenerator extends Component {
                     let blockInfo = this.generateBlockTypeIdPosInChunk(y, blocksIdByBiomeType);
 
                     blockInfo.blockCustomPos = this.blockCustomPos.set(x, y, z).add(this.customOffset);
+                    blockInfo.hp = worldData.getHpByBlockType(blockInfo.blockId);
 
                     const entity = poolService.allocBlock(blockInfo.blockId);
                     entity.setPosition(blockInfo.blockCustomPos)
@@ -75,7 +74,6 @@ export class ChunkGenerator extends Component {
 
                     if (y >= chunkData.chunkSizeHeight - 2) {
                         entity.active = true
-
                     }
 
                     if (!this.blocks[blockInfo.blockCustomPos.y]) this.blocks[blockInfo.blockCustomPos.y] = [];
@@ -96,38 +94,53 @@ export class ChunkGenerator extends Component {
         let block = chunkData.blocksDictionary.get(localPositionInChunk.toString())
 
         if (block) {
-            let blockToDelete = block.blockNode
-            if (blockToDelete) {
-                tween(blockToDelete)
-                    .to(0.1, {
-                        scale: this.twinScaleTo,
-                        eulerAngles:  this.twinEulerAnglesTo,
-                    }) // Растягивание и наклон
-                    .to(0.1, {
-                        scale: this.twinBackScale,
-                        eulerAngles:  this.twinBackEulerAngles,
-                    }, {easing: "sineInOut"}) // Сжатие с обратным наклоном
-                    .to(0.1, {
-                        scale: this.twinScaleDefault,
-                        eulerAngles:  this.twinEulerAnglesDefault,
-                    }, {easing: "sineIn"}) // Возврат к нормальному состоянию
-                    .call(() => {
-                        blockToDelete.removeFromParent();
-                        poolService.freeBlock(block.blockId, blockToDelete)
-                        chunkData.blocksDictionary.delete(localPositionInChunk.toString())
+            // Сила кирки
+            const powerHit = 1;
+            let blockToDelete = false;
 
-                        delete this.blocks[localPositionInChunk.y][localPositionInChunk.x][localPositionInChunk.z];
-
-                    })
-                    .start();
+            // Проверяем, был ли блок уже ударен
+            if (!block.alreadyWasHit) {
+                block.alreadyWasHit = true;
+                this.spawnAroundBlock(localPositionInChunk)
             }
+
+            block.hp -= powerHit;
+
+            if (block.hp <= 0) {
+                blockToDelete = true;
+            }
+
+            tween(block.blockNode)
+                .to(0.1, {
+                    scale: this.twinScaleTo,
+                    eulerAngles: this.twinEulerAnglesTo,
+                }) // Растягивание и наклон
+                .to(0.1, {
+                    scale: this.twinBackScale,
+                    eulerAngles: this.twinBackEulerAngles,
+                }, {easing: "sineInOut"}) // Сжатие с обратным наклоном
+                .to(0.1, {
+                    scale: this.twinScaleDefault,
+                    eulerAngles: this.twinEulerAnglesDefault,
+                }, {easing: "sineIn"}) // Возврат к нормальному состоянию
+                .call(() => this.handleBlockRemoval(block, localPositionInChunk, chunkData, blockToDelete))
+                .start();
 
             if (chunkData.blocksDictionary.size === 0) {
                 this.init()
             }
-
-            this.spawnAroundBlock(localPositionInChunk)
         }
+    }
+
+    private handleBlockRemoval(block: BlockInfo, localPositionInChunk: Vec3, chunkData: ChunkData, blockToDelete: boolean) {
+        if (!blockToDelete) {
+            return
+        }
+
+        block.blockNode.removeFromParent();
+        poolService.freeBlock(block.blockId, block.blockNode);
+        chunkData.blocksDictionary.delete(localPositionInChunk.toString());
+        delete this.blocks[localPositionInChunk.y]?.[localPositionInChunk.x]?.[localPositionInChunk.z];
     }
 
     private getBlockAtPosition(x: number, y: number, z: number): Node | undefined {
@@ -135,7 +148,7 @@ export class ChunkGenerator extends Component {
     }
 
     private spawnAroundBlock(localPositionInChunk: Vec3) {
-        const { x, y, z } = localPositionInChunk;
+        const {x, y, z} = localPositionInChunk;
 
         // Список направлений
         const directions = [

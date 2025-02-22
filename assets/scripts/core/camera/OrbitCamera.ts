@@ -18,7 +18,7 @@ const {ccclass, property} = _decorator;
 
 @ccclass('OrbitCamera')
 export class OrbitCamera extends Component {
-    @property({type: Vec3}) offset: Vec3 = new Vec3(0, 3, 0);
+    @property({type: Vec3}) offset: Vec3 = new Vec3(0, 3, 0); // Смещение камеры относительно объекта
 
     @property({type: CCFloat, tooltip: "Значения 0 даст бесконечный предел расстояния"}) distanceMin: number = 5;
     @property({type: CCFloat, tooltip: "Значения 0 даст бесконечный предел расстояния"}) distanceMax: number = 14;
@@ -28,7 +28,7 @@ export class OrbitCamera extends Component {
 
     @property({type: CCFloat, tooltip: "Как быстро камера движется по орбите"}) orbitSensitivity: number = 0.2;
 
-    @property({type: Node}) focusEntity: Node;
+    @property({type: Node}) focusEntity: Node; // Целевой объект камеры
 
     private _currentInput: IOrbitCameraInput;
     private _ray: geometry.Ray;
@@ -96,7 +96,7 @@ export class OrbitCamera extends Component {
         if (result) {
             const sweepResult = PhysicsSystem.instance.sweepCastClosestResult;
             const hitDistance = sweepResult.distance;
-            this._obstacleAvoidanceDistance = math.clamp(hitDistance, 0.5, this.distanceMax);
+            this._obstacleAvoidanceDistance = math.clamp(hitDistance, 0.25, this.distanceMax);
         } else {
             this._obstacleAvoidanceDistance = this.distanceMax;
         }

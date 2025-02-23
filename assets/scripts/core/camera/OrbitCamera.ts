@@ -68,7 +68,9 @@ export class OrbitCamera extends Component {
     start() {
         PhysicsSystem.instance.debugDrawFlags = EPhysicsDrawFlags.WIRE_FRAME | EPhysicsDrawFlags.AABB;
 
+        this._distance = this.distanceMax;
         this._obstacleAvoidanceDistance = this.distanceMax;
+
         this._currentInput = sys.isMobile === true ? new OrbitCameraInputMouse(this) : new OrbitCameraInputMouse(this);
         this._currentInput.enable();
     }
@@ -77,8 +79,6 @@ export class OrbitCamera extends Component {
         if (!this.focusEntity) return;
 
         this._obstacleAvoidance();
-
-        this._distance = Math.min(this._distance, this._obstacleAvoidanceDistance);
     }
 
     lateUpdate(dt: number) {
@@ -93,12 +93,12 @@ export class OrbitCamera extends Component {
 
         this._ray = new geometry.Ray(focus.x, focus.y, focus.z, camera.x, camera.y, camera.z);
 
-        const result = PhysicsSystem.instance.sweepSphereClosest(this._ray, 0.5, undefined, this._distance - 0.05, false);
+        const result = PhysicsSystem.instance.sweepSphereClosest(this._ray, 0.25, this.obstaclesGroup, this._distance - 0.05, false);
 
         if (result) {
             const sweepResult = PhysicsSystem.instance.sweepCastClosestResult;
             const hitDistance = sweepResult.distance;
-            this._obstacleAvoidanceDistance = math.clamp(hitDistance, 0.25, this.distanceMax);
+            this._obstacleAvoidanceDistance = hitDistance - 0.125;
         } else {
             this._obstacleAvoidanceDistance = this.distanceMax;
         }
@@ -107,9 +107,12 @@ export class OrbitCamera extends Component {
     private _updatePosition() {
         let position = this.node.getPosition();
 
+        const distance = Math.min(this._distance, this._obstacleAvoidanceDistance);
+
         this.node.setRotationFromEuler(this._pitch, this._yaw, 0);
+
         position.set(this.node.forward);
-        position.multiplyScalar(-this._distance);
+        position.multiplyScalar(-distance);
         position.add(this.focusEntity.worldPosition);
         position.add(this.offset);
 

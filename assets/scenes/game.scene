@@ -247,10 +247,10 @@
     "__prefab": null,
     "_projection": 1,
     "_priority": 0,
-    "_fov": 45,
+    "_fov": 60,
     "_fovAxis": 0,
     "_orthoHeight": 10,
-    "_near": 0.1,
+    "_near": 0.05,
     "_far": 450,
     "_color": {
       "__type__": "cc.Color",
@@ -294,7 +294,7 @@
     "offset": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0.8,
+      "y": 0.6,
       "z": 0
     },
     "distanceMin": 1,
@@ -305,6 +305,7 @@
     "focusEntity": {
       "__id__": 8
     },
+    "obstaclesGroup": 16,
     "_id": "dcyQSWf8JP17FqVPH43lBG"
   },
   {

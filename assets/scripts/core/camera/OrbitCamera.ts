@@ -30,6 +30,8 @@ export class OrbitCamera extends Component {
 
     @property({type: Node}) focusEntity: Node; // Целевой объект камеры
 
+    @property({ type: PhysicsSystem.PhysicsGroup }) obstaclesGroup = PhysicsSystem.PhysicsGroup.DEFAULT;
+
     private _currentInput: IOrbitCameraInput;
     private _ray: geometry.Ray;
 

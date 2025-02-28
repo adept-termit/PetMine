@@ -9,7 +9,7 @@ import {
     Node,
     Camera,
     PhysicsSystem,
-    Vec3, sys
+    Vec3, sys, CharacterController
 } from 'cc';
 import {ChunkGenerator} from "db://assets/scripts/core/chunk/ChunkGenerator";
 
@@ -18,13 +18,16 @@ const {ccclass, property} = _decorator;
 @ccclass('Hit')
 export class Hit extends Component {
     @property({type: Camera}) camera: Camera;
+    @property({type: Node}) character?: Node;
     @property({type: Node}) sphere?: Node;
 
     private _ray: geometry.Ray = new geometry.Ray();
     private _chunkGenerator: ChunkGenerator;
+    private _characterController: CharacterController; // Контроллер персонажа
 
     onLoad() {
         this._chunkGenerator = this.node.getComponent(ChunkGenerator)
+        this._characterController = this.character.getComponent(CharacterController)
     }
 
     onEnable() {
@@ -50,7 +53,9 @@ export class Hit extends Component {
             const hitPoint = raycastResults.hitPoint;
             this.sphere?.setWorldPosition(hitPoint);
 
+
             const localHitPoint = this._chunkGenerator.node.inverseTransformPoint(new Vec3(), hitPoint);
+            const localHitCharacterPoint = this._chunkGenerator.node.inverseTransformPoint(new Vec3(), this.character.getWorldPosition());
             const hitNormal = raycastResults.hitNormal;
             const offset = 0.02;
 
@@ -60,7 +65,51 @@ export class Hit extends Component {
                 Math.floor(localHitPoint.z - (hitNormal.z > 0 ? offset : -offset))
             );
 
+            const localPositionCharacterInChunk = new Vec3(
+                Math.floor(localHitCharacterPoint.x - (hitNormal.x > 0 ? offset : -offset)),
+                Math.floor(localHitCharacterPoint.y - (hitNormal.y > 0 ? offset : -offset))  -1,
+                Math.floor(localHitCharacterPoint.z - (hitNormal.z > 0 ? offset : -offset))
+            );
+            console.log(localPositionInChunk)
+             console.log(localPositionCharacterInChunk)
+
+            // this._characterController.isGrounded
+            // CharacterController
             this._chunkGenerator.reGenerateChunk(localPositionInChunk);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

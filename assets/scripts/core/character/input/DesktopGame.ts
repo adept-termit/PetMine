@@ -33,23 +33,19 @@ export class DesktopGame implements IInput {
         const keyInput = kbEvent.keyCode;
 
         if (keyInput === KeyCode.KEY_W || keyInput === KeyCode.ARROW_UP) {
-            console.log('KEY_W')
             this._inputMap.forward = true;
         }
 
         if (keyInput === KeyCode.KEY_D || keyInput === KeyCode.ARROW_RIGHT) {
-            console.log('KEY_D')
             this._inputMap.right = true;
         }
 
         if (keyInput === KeyCode.KEY_S || keyInput === KeyCode.ARROW_DOWN) {
-            console.log('KEY_S')
             this._inputMap.back = true;
         }
 
         if (keyInput === KeyCode.KEY_A || keyInput === KeyCode.ARROW_LEFT) {
             this._inputMap.left = true;
-            console.log('KEY_A')
         }
 
         if (keyInput === KeyCode.SPACE) {

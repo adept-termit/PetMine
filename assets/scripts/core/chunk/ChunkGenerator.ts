@@ -1,4 +1,18 @@
-import {_decorator, CCInteger, Component, instantiate, MeshCollider, Node, Pool, tween, utils, Vec3} from 'cc';
+import {
+    _decorator,
+    CCInteger,
+    Component,
+    instantiate,
+    MeshCollider,
+    MeshRenderer,
+    BoxCollider,
+    Node,
+    Pool,
+    tween,
+    utils,
+    Vec3,
+    RigidBody,
+} from 'cc';
 
 import {BiomeType, BlockTypeId, Rarity, TBlocksIdByBiomeType, worldData} from "db://assets/scripts/core/chunk/world";
 import {ChunkData} from "db://assets/scripts/core/chunk/ChunkData";
@@ -123,6 +137,7 @@ export class ChunkGenerator extends Component {
             }, {easing: "sineIn"})
             .call(() => this.removeBlock(block, localPosition, chunkData, shouldRemove))
             .start();
+
         if (chunkData.blocksDictionary.size === 0) {
             this.init()
         }

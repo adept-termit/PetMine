@@ -7,12 +7,11 @@ import {
     CCFloat,
     Vec3,
     geometry,
-    PhysicsSystem, EPhysicsDrawFlags
+    PhysicsSystem, EPhysicsDrawFlags, director, Director
 } from 'cc';
 
 import {IOrbitCameraInput} from "db://assets/scripts/core/camera/IOrbitCameraInput";
 import {OrbitCameraInputMouse} from "db://assets/scripts/core/camera/OrbitCameraInputMouse";
-
 
 const {ccclass, property} = _decorator;
 
@@ -30,7 +29,7 @@ export class OrbitCamera extends Component {
 
     @property({type: Node}) focusEntity: Node; // Целевой объект камеры
 
-    @property({ type: PhysicsSystem.PhysicsGroup }) obstaclesGroup = PhysicsSystem.PhysicsGroup.DEFAULT;
+    @property({type: PhysicsSystem.PhysicsGroup}) obstaclesGroup = PhysicsSystem.PhysicsGroup.DEFAULT;
 
     private _currentInput: IOrbitCameraInput;
     private _ray: geometry.Ray;
@@ -75,7 +74,7 @@ export class OrbitCamera extends Component {
         this._currentInput.enable();
     }
 
-    update(): void {
+    update(dt: number): void {
         if (!this.focusEntity) return;
 
         this._obstacleAvoidance();
@@ -93,12 +92,14 @@ export class OrbitCamera extends Component {
 
         this._ray = new geometry.Ray(focus.x, focus.y, focus.z, camera.x, camera.y, camera.z);
 
-        const result = PhysicsSystem.instance.sweepSphereClosest(this._ray, 0.25, this.obstaclesGroup, this._distance - 0.05, false);
+        const sphereRadius = 0.1
+        const halfSphereRadius = sphereRadius * 0.5
+        const result = PhysicsSystem.instance.sweepSphereClosest(this._ray, sphereRadius, this.obstaclesGroup, this._distance - halfSphereRadius, false);
 
         if (result) {
             const sweepResult = PhysicsSystem.instance.sweepCastClosestResult;
             const hitDistance = sweepResult.distance;
-            this._obstacleAvoidanceDistance = hitDistance - 0.125;
+            this._obstacleAvoidanceDistance = hitDistance - halfSphereRadius;
         } else {
             this._obstacleAvoidanceDistance = this.distanceMax;
         }
@@ -110,7 +111,6 @@ export class OrbitCamera extends Component {
         const distance = Math.min(this._distance, this._obstacleAvoidanceDistance);
 
         this.node.setRotationFromEuler(this._pitch, this._yaw, 0);
-
         position.set(this.node.forward);
         position.multiplyScalar(-distance);
         position.add(this.focusEntity.worldPosition);

@@ -1,0 +1,89 @@
+CCEffect %{
+  techniques:
+  - name: outline
+    passes:
+    - vert: outline-vs
+      frag: outline-fs
+      properties:
+        outlineColor: { value: [0.0, 0.0, 0.0, 1.0], editor: { type: color } }
+        outlineWidth: { value: 0.01, editor: { slide: true, range: [0, 0.1], step: 0.001 } }
+      rasterizerState:
+        cullMode: front   # Скрываем внутреннюю часть модели
+  - name: opaque
+    passes:
+    - vert: standard-vs
+      frag: standard-fs
+      properties: &props
+        mainTexture:              { value: grey, target: albedoMap, editor: { displayName: AlbedoMap } }
+        mainColor:                { value: [1.0, 1.0, 1.0, 1.0], target: albedo, linear: true, editor: { displayName: Albedo, type: color } }
+        albedoScale:              { value: [1.0, 1.0, 1.0], target: albedoScaleAndCutoff.xyz }
+        alphaThreshold:           { value: 0.5, target: albedoScaleAndCutoff.w, editor: { parent: USE_ALPHA_TEST, slide: true, range: [0, 1.0], step: 0.001 } }
+        roughness:                { value: 0.8, target: pbrParams.y, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
+        metallic:                 { value: 0.6, target: pbrParams.z, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
+}%
+
+
+CCProgram shared-ubos %{
+  uniform Constants {
+    vec4 albedo;
+    vec4 albedoScaleAndCutoff;
+    vec4 pbrParams;
+  };
+}%
+
+
+CCProgram outline-vs %{
+  precision highp float;
+
+  layout(location = 0) in vec3 a_position;
+  layout(location = 1) in vec3 a_normal;
+
+  uniform mat4 cc_matWorld;
+  uniform mat4 cc_matViewProj;
+  uniform float outlineWidth;
+
+  void main() {
+      vec3 normal = normalize(mat3(cc_matWorld) * a_normal);
+      vec3 outlinePos = a_position + normal * outlineWidth;
+      gl_Position = cc_matViewProj * vec4(outlinePos, 1.0);
+  }
+}%
+
+
+CCProgram outline-fs %{
+  precision highp float;
+
+  out vec4 FragColor;
+  uniform vec4 outlineColor;
+
+  void main() {
+      FragColor = outlineColor;
+  }
+}%
+
+
+CCProgram standard-vs %{
+  precision highp float;
+
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/common-macros>
+  #include <surfaces/includes/common-vs>
+  #include <shared-ubos>
+  #include <surface-vertex>
+  #include <surfaces/includes/standard-vs>
+  #include <shading-entries/main-functions/render-to-scene/vs>
+}%
+
+
+CCProgram standard-fs %{
+  precision highp float;
+
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/common-macros>
+  #include <surfaces/includes/common-fs>
+  #include <shared-ubos>
+  #include <surface-fragment>
+  #include <lighting-models/includes/standard>
+  #include <surfaces/includes/standard-fs>
+  #include <shading-entries/main-functions/render-to-scene/fs>
+}%

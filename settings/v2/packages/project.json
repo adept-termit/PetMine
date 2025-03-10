@@ -1,4 +1,31 @@
 {
   "__version__": "1.0.6",
-  "custom_joint_texture_layouts": []
+  "custom_joint_texture_layouts": [],
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "PLAYER"
+      },
+      {
+        "index": 2,
+        "name": "PLAYER_INTERACT"
+      },
+      {
+        "index": 3,
+        "name": "INTERACTABLE"
+      },
+      {
+        "index": 4,
+        "name": "WORLD_STATIC"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 1,
+      "1": 24,
+      "2": 8,
+      "3": 6,
+      "4": 2
+    }
+  }
 }

@@ -9,7 +9,7 @@ import {
     Node,
     Camera,
     PhysicsSystem,
-    Vec3, sys
+    Vec3, sys, CharacterController
 } from 'cc';
 import {ChunkGenerator} from "db://assets/scripts/core/chunk/ChunkGenerator";
 
@@ -18,6 +18,7 @@ const {ccclass, property} = _decorator;
 @ccclass('Hit')
 export class Hit extends Component {
     @property({type: Camera}) camera: Camera;
+    @property({type: Node}) character?: Node;
     @property({type: Node}) sphere?: Node;
 
     private _ray: geometry.Ray = new geometry.Ray();
@@ -51,6 +52,8 @@ export class Hit extends Component {
             this.sphere?.setWorldPosition(hitPoint);
 
             const localHitPoint = this._chunkGenerator.node.inverseTransformPoint(new Vec3(), hitPoint);
+            const localHitCharacterPoint = this._chunkGenerator.node.inverseTransformPoint(new Vec3(), this.character.getWorldPosition());
+
             const hitNormal = raycastResults.hitNormal;
             const offset = 0.02;
 
@@ -60,7 +63,60 @@ export class Hit extends Component {
                 Math.floor(localHitPoint.z - (hitNormal.z > 0 ? offset : -offset))
             );
 
-            this._chunkGenerator.reGenerateChunk(localPositionInChunk);
+            const localPositionCharacterInChunk = new Vec3(
+                Math.floor(localHitCharacterPoint.x - (hitNormal.x > 0 ? offset : -offset)),
+                Math.floor(localHitCharacterPoint.y - (hitNormal.y > 0 ? offset : -offset)) - 1,
+                Math.floor(localHitCharacterPoint.z - (hitNormal.z > 0 ? offset : -offset))
+            );
+
+            if (this.isWithinRange(localPositionInChunk,localPositionCharacterInChunk)){
+                this._chunkGenerator.reGenerateChunk(localPositionInChunk);
+            }
         }
     }
+
+    private isWithinRange(localPositionInChunk: Vec3, localPositionCharacterInChunk: Vec3) {
+        const { x, y, z } = localPositionInChunk;
+        const { x: charX, y: charY, z: charZ } = localPositionCharacterInChunk;
+
+        return (
+            x >= charX - 2 && x <= charX + 2 &&
+            y >= charY - 2 && y <= charY + 2 &&
+            z >= charZ - 2 && z <= charZ + 2
+        );
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

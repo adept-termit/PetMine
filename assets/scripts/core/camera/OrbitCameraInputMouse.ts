@@ -22,6 +22,7 @@ export class OrbitCameraInputMouse implements IOrbitCameraInput {
     private _addEventListeners(): void {
         input.on(Input.EventType.MOUSE_MOVE, this._onMouseMove, this);
         input.on(Input.EventType.MOUSE_WHEEL, this._onMouseWheel, this);
+
         input.on(Input.EventType.MOUSE_DOWN, this._onKeyDown, this);
         input.on(Input.EventType.MOUSE_UP, this._onKeyUp, this);
     }

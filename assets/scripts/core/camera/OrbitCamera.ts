@@ -7,18 +7,17 @@ import {
     CCFloat,
     Vec3,
     geometry,
-    PhysicsSystem, EPhysicsDrawFlags
+    PhysicsSystem, EPhysicsDrawFlags, director, Director
 } from 'cc';
 
 import {IOrbitCameraInput} from "db://assets/scripts/core/camera/IOrbitCameraInput";
 import {OrbitCameraInputMouse} from "db://assets/scripts/core/camera/OrbitCameraInputMouse";
 
-
 const {ccclass, property} = _decorator;
 
 @ccclass('OrbitCamera')
 export class OrbitCamera extends Component {
-    @property({type: Vec3}) offset: Vec3 = new Vec3(0, 3, 0);
+    @property({type: Vec3}) offset: Vec3 = new Vec3(0, 3, 0); // Смещение камеры относительно объекта
 
     @property({type: CCFloat, tooltip: "Значения 0 даст бесконечный предел расстояния"}) distanceMin: number = 5;
     @property({type: CCFloat, tooltip: "Значения 0 даст бесконечный предел расстояния"}) distanceMax: number = 14;
@@ -28,7 +27,9 @@ export class OrbitCamera extends Component {
 
     @property({type: CCFloat, tooltip: "Как быстро камера движется по орбите"}) orbitSensitivity: number = 0.2;
 
-    @property({type: Node}) focusEntity: Node;
+    @property({type: Node}) focusEntity: Node; // Целевой объект камеры
+
+    @property({type: PhysicsSystem.PhysicsGroup}) obstaclesGroup = PhysicsSystem.PhysicsGroup.DEFAULT;
 
     private _currentInput: IOrbitCameraInput;
     private _ray: geometry.Ray;
@@ -66,17 +67,17 @@ export class OrbitCamera extends Component {
     start() {
         PhysicsSystem.instance.debugDrawFlags = EPhysicsDrawFlags.WIRE_FRAME | EPhysicsDrawFlags.AABB;
 
+        this._distance = this.distanceMax;
         this._obstacleAvoidanceDistance = this.distanceMax;
+
         this._currentInput = sys.isMobile === true ? new OrbitCameraInputMouse(this) : new OrbitCameraInputMouse(this);
         this._currentInput.enable();
     }
 
-    update(): void {
+    update(dt: number): void {
         if (!this.focusEntity) return;
 
         this._obstacleAvoidance();
-
-        this._distance = Math.min(this._distance, this._obstacleAvoidanceDistance);
     }
 
     lateUpdate(dt: number) {
@@ -91,12 +92,14 @@ export class OrbitCamera extends Component {
 
         this._ray = new geometry.Ray(focus.x, focus.y, focus.z, camera.x, camera.y, camera.z);
 
-        const result = PhysicsSystem.instance.sweepSphereClosest(this._ray, 0.5, undefined, this._distance - 0.05, false);
+        const sphereRadius = 0.1
+        const halfSphereRadius = sphereRadius * 0.5
+        const result = PhysicsSystem.instance.sweepSphereClosest(this._ray, sphereRadius, this.obstaclesGroup, this._distance - halfSphereRadius, false);
 
         if (result) {
             const sweepResult = PhysicsSystem.instance.sweepCastClosestResult;
             const hitDistance = sweepResult.distance;
-            this._obstacleAvoidanceDistance = math.clamp(hitDistance, 0.5, this.distanceMax);
+            this._obstacleAvoidanceDistance = hitDistance - halfSphereRadius;
         } else {
             this._obstacleAvoidanceDistance = this.distanceMax;
         }
@@ -105,9 +108,11 @@ export class OrbitCamera extends Component {
     private _updatePosition() {
         let position = this.node.getPosition();
 
+        const distance = Math.min(this._distance, this._obstacleAvoidanceDistance);
+
         this.node.setRotationFromEuler(this._pitch, this._yaw, 0);
         position.set(this.node.forward);
-        position.multiplyScalar(-this._distance);
+        position.multiplyScalar(-distance);
         position.add(this.focusEntity.worldPosition);
         position.add(this.offset);
 

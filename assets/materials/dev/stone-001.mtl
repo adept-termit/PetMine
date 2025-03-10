@@ -1,0 +1,127 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "__editorExtras__": {},
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "9b20a514-6cc3-49de-b216-b6b863046249",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {
+      "USE_OUTLINE_PASS": true,
+      "USE_POSITION_SCALING": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ],
+  "_states": [
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    }
+  ],
+  "_props": [
+    {},
+    {
+      "mainColor": {
+        "__type__": "cc.Color",
+        "r": 144,
+        "g": 152,
+        "b": 163,
+        "a": 255
+      },
+      "shadeColor1": {
+        "__type__": "cc.Color",
+        "r": 144,
+        "g": 152,
+        "b": 163,
+        "a": 255
+      },
+      "shadeColor2": {
+        "__type__": "cc.Color",
+        "r": 144,
+        "g": 152,
+        "b": 163,
+        "a": 255
+      },
+      "specular": {
+        "__type__": "cc.Color",
+        "r": 144,
+        "g": 152,
+        "b": 163,
+        "a": 255
+      }
+    },
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

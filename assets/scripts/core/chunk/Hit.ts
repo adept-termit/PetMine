@@ -23,11 +23,9 @@ export class Hit extends Component {
 
     private _ray: geometry.Ray = new geometry.Ray();
     private _chunkGenerator: ChunkGenerator;
-    private _characterController: CharacterController; // Контроллер персонажа
 
     onLoad() {
         this._chunkGenerator = this.node.getComponent(ChunkGenerator)
-        this._characterController = this.character.getComponent(CharacterController)
     }
 
     onEnable() {
@@ -53,9 +51,9 @@ export class Hit extends Component {
             const hitPoint = raycastResults.hitPoint;
             this.sphere?.setWorldPosition(hitPoint);
 
-
             const localHitPoint = this._chunkGenerator.node.inverseTransformPoint(new Vec3(), hitPoint);
             const localHitCharacterPoint = this._chunkGenerator.node.inverseTransformPoint(new Vec3(), this.character.getWorldPosition());
+
             const hitNormal = raycastResults.hitNormal;
             const offset = 0.02;
 
@@ -67,16 +65,25 @@ export class Hit extends Component {
 
             const localPositionCharacterInChunk = new Vec3(
                 Math.floor(localHitCharacterPoint.x - (hitNormal.x > 0 ? offset : -offset)),
-                Math.floor(localHitCharacterPoint.y - (hitNormal.y > 0 ? offset : -offset))  -1,
+                Math.floor(localHitCharacterPoint.y - (hitNormal.y > 0 ? offset : -offset)) - 1,
                 Math.floor(localHitCharacterPoint.z - (hitNormal.z > 0 ? offset : -offset))
             );
-            console.log(localPositionInChunk)
-             console.log(localPositionCharacterInChunk)
 
-            // this._characterController.isGrounded
-            // CharacterController
-            this._chunkGenerator.reGenerateChunk(localPositionInChunk);
+            if (this.isWithinRange(localPositionInChunk,localPositionCharacterInChunk)){
+                this._chunkGenerator.reGenerateChunk(localPositionInChunk);
+            }
         }
+    }
+
+    private isWithinRange(localPositionInChunk: Vec3, localPositionCharacterInChunk: Vec3) {
+        const { x, y, z } = localPositionInChunk;
+        const { x: charX, y: charY, z: charZ } = localPositionCharacterInChunk;
+
+        return (
+            x >= charX - 2 && x <= charX + 2 &&
+            y >= charY - 2 && y <= charY + 2 &&
+            z >= charZ - 2 && z <= charZ + 2
+        );
     }
 }
 

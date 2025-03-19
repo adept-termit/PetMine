@@ -2,16 +2,9 @@ import {
     _decorator,
     CCInteger,
     Component,
-    instantiate,
-    MeshCollider,
-    MeshRenderer,
-    BoxCollider,
     Node,
-    Pool,
     tween,
-    utils,
     Vec3,
-    RigidBody,
 } from 'cc';
 
 import {BiomeType, BlockTypeId, Rarity, TBlocksIdByBiomeType, worldData} from "db://assets/scripts/core/chunk/world";
@@ -30,10 +23,9 @@ export class ChunkGenerator extends Component {
     @property({type: Node}) instanceCube: Node;
     @property({type: cc.Enum(BiomeType)}) biomeType: BiomeType = BiomeType.Forest
 
-    public blocks = [];
     private blockCustomPos = new Vec3()
 
-    private readonly customOffset = new Vec3(0.5, 0.5, 0.5);
+    private readonly customOffset = new Vec3();
     private readonly twinSettings = {
         scaleTo: new Vec3(1.2, 0.8, 1.2),
         eulerAnglesTo: new Vec3(4, 0, 4),
@@ -97,9 +89,9 @@ export class ChunkGenerator extends Component {
                         entity.active = true
                     }
 
-                    if (!this.blocks[blockInfo.blockCustomPos.y]) this.blocks[blockInfo.blockCustomPos.y] = [];
-                    if (!this.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x]) this.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x] = [];
-                    this.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x][blockInfo.blockCustomPos.z] = entity;
+                    if (!chunkData.blocks[blockInfo.blockCustomPos.y]) chunkData.blocks[blockInfo.blockCustomPos.y] = [];
+                    if (!chunkData.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x]) chunkData.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x] = [];
+                    chunkData.blocks[blockInfo.blockCustomPos.y][blockInfo.blockCustomPos.x][blockInfo.blockCustomPos.z] = entity;
 
                     blockInfo.blockNode = entity
 
@@ -120,7 +112,7 @@ export class ChunkGenerator extends Component {
 
         if (!block.alreadyWasHit) {
             block.alreadyWasHit = true;
-            this.spawnAroundBlock(localPosition);
+            this.spawnAroundBlock(localPosition, chunkData);
         }
 
         const shouldRemove = block.hp <= 0;
@@ -151,18 +143,14 @@ export class ChunkGenerator extends Component {
         block.blockNode.removeFromParent();
         poolService.freeBlock(block.blockId, block.blockNode);
         chunkData.blocksDictionary.delete(localPositionInChunk.toString());
-        delete this.blocks[localPositionInChunk.y]?.[localPositionInChunk.x]?.[localPositionInChunk.z];
+        delete chunkData.blocks[localPositionInChunk.y]?.[localPositionInChunk.x]?.[localPositionInChunk.z];
     }
 
-    private getBlockAtPosition(x: number, y: number, z: number): Node | undefined {
-        return this.blocks[y]?.[x]?.[z];
-    }
-
-    private spawnAroundBlock(localPositionInChunk: Vec3) {
+    private spawnAroundBlock(localPositionInChunk: Vec3, chunkData: ChunkData) {
         const {x, y, z} = localPositionInChunk;
 
         this.directions.forEach(([dx, dy, dz]) => {
-            const block = this.getBlockAtPosition(x + dx, y + dy, z + dz);
+            const block = chunkData.blocks[y + dy]?.[x + dx]?.[z + dz];
             if (block) block.active = true;
         });
     }

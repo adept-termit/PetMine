@@ -2,18 +2,18 @@
   "ver": "2.3.13",
   "importer": "gltf",
   "imported": true,
-  "uuid": "280f9ced-ba3a-44dd-9f97-14667b21fa17",
+  "uuid": "362d5169-7560-42c3-bfd4-84c503a30584",
   "files": [],
   "subMetas": {
     "2fc21": {
       "importer": "gltf-mesh",
-      "uuid": "280f9ced-ba3a-44dd-9f97-14667b21fa17@2fc21",
+      "uuid": "362d5169-7560-42c3-bfd4-84c503a30584@2fc21",
       "displayName": "",
       "id": "2fc21",
       "name": "Cube1.001.mesh",
       "userData": {
         "gltfIndex": 0,
-        "triangleCount": 12
+        "triangleCount": 492
       },
       "ver": "1.1.1",
       "imported": true,
@@ -23,12 +23,12 @@
       ],
       "subMetas": {}
     },
-    "29adf": {
+    "a06f6": {
       "importer": "gltf-scene",
-      "uuid": "280f9ced-ba3a-44dd-9f97-14667b21fa17@29adf",
+      "uuid": "362d5169-7560-42c3-bfd4-84c503a30584@a06f6",
       "displayName": "",
-      "id": "29adf",
-      "name": "cube.prefab",
+      "id": "a06f6",
+      "name": "crystalCube.prefab",
       "userData": {
         "gltfIndex": 0
       },
@@ -62,13 +62,13 @@
     },
     "assetFinder": {
       "meshes": [
-        "280f9ced-ba3a-44dd-9f97-14667b21fa17@2fc21"
+        "362d5169-7560-42c3-bfd4-84c503a30584@2fc21"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "280f9ced-ba3a-44dd-9f97-14667b21fa17@29adf"
+        "362d5169-7560-42c3-bfd4-84c503a30584@a06f6"
       ]
     }
   }

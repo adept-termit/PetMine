@@ -5,6 +5,7 @@
     "version": "3.8.5"
   },
   "dependencies": {
-    "@cocos/creator-types": "^3.8.5"
+    "@cocos/creator-types": "^3.8.5",
+    "eventemitter3": "^5.0.1"
   }
 }

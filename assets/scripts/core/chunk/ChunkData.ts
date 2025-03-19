@@ -10,6 +10,7 @@ export class ChunkData {
     private _chunkSize: number;
     private _chunkSizeHeight: number;
     private _blocksDictionary: Map<string, BlockInfo> = new Map();
+    public blocks= []; //TODO костяль для ломания болокв и петов и перса
 
     get chunkPos(): Vec3 {
         return this._chunkPos;

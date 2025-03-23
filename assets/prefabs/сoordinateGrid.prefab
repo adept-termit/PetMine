@@ -439,7 +439,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "x-001",
+    "_name": "x-1",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -560,7 +560,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "x-002",
+    "_name": "x-2",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -681,7 +681,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "z-001",
+    "_name": "z-1",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -802,7 +802,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "z-002",
+    "_name": "z-2",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {

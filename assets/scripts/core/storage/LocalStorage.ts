@@ -10,8 +10,7 @@ class GameLocalStorage {
     }
 
     load() {
-        localStorage.clear();
-
+         localStorage.clear();
         const saves = localStorage.getItem(STORAGE_KEY);
 
         return saves ? JSON.parse(saves) as TPlayerProgress : null;

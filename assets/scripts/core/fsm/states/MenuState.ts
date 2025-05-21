@@ -1,5 +1,5 @@
 import {IState} from "db://assets/scripts/core/fsm/IState";
-import {GameManager} from "db://assets/scripts/core/fsm/GameManager";
+import {EnumGameState, GameManager} from "db://assets/scripts/core/fsm/GameManager";
 
 export class MenuState implements IState {
     private gameManager: GameManager;
@@ -9,7 +9,7 @@ export class MenuState implements IState {
     }
 
     async onEnter() {
-        console.log(123)
+        this.gameManager.stateMachine.changeState(EnumGameState.LoadGame);
     }
 
     public onExit() {

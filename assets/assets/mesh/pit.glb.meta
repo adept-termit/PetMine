@@ -2,12 +2,12 @@
   "ver": "2.3.13",
   "importer": "gltf",
   "imported": true,
-  "uuid": "e2350c66-567f-4f09-bae0-b6e818d7f6a2",
+  "uuid": "26f951b5-1885-487c-9e6b-0d477989054c",
   "files": [],
   "subMetas": {
     "97ff1": {
       "importer": "gltf-mesh",
-      "uuid": "e2350c66-567f-4f09-bae0-b6e818d7f6a2@97ff1",
+      "uuid": "26f951b5-1885-487c-9e6b-0d477989054c@97ff1",
       "displayName": "",
       "id": "97ff1",
       "name": "pit.001.mesh",
@@ -23,12 +23,12 @@
       ],
       "subMetas": {}
     },
-    "31ae0": {
+    "11aec": {
       "importer": "gltf-scene",
-      "uuid": "e2350c66-567f-4f09-bae0-b6e818d7f6a2@31ae0",
+      "uuid": "26f951b5-1885-487c-9e6b-0d477989054c@11aec",
       "displayName": "",
-      "id": "31ae0",
-      "name": "pit.prefab",
+      "id": "11aec",
+      "name": "Pit.prefab",
       "userData": {
         "gltfIndex": 0
       },
@@ -62,13 +62,13 @@
     },
     "assetFinder": {
       "meshes": [
-        "e2350c66-567f-4f09-bae0-b6e818d7f6a2@97ff1"
+        "26f951b5-1885-487c-9e6b-0d477989054c@97ff1"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "e2350c66-567f-4f09-bae0-b6e818d7f6a2@31ae0"
+        "26f951b5-1885-487c-9e6b-0d477989054c@11aec"
       ]
     }
   }

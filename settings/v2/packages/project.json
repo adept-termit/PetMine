@@ -18,14 +18,30 @@
       {
         "index": 4,
         "name": "WORLD_STATIC"
+      },
+      {
+        "index": 6,
+        "name": "PLAYER_TRIGGER"
+      },
+      {
+        "index": 7,
+        "name": "TRIGGER_ZONE"
+      },
+      {
+        "index": 8,
+        "name": "CHUNK_BLOCK"
       }
     ],
     "collisionMatrix": {
       "0": 1,
-      "1": 24,
+      "1": 280,
       "2": 8,
       "3": 6,
-      "4": 2
+      "4": 2,
+      "5": 32,
+      "6": 128,
+      "7": 64,
+      "8": 2
     }
   }
 }

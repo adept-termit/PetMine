@@ -59,9 +59,14 @@ export const EMPTY_PLAYER_PROGRESS: TPlayerProgress = {
     },
     wallet: null,
     pets: null,
-    selected: null,
+    selected: {
+        skin: null,
+        pets: [],
+        pickaxe: 'basic',
+        gadgets: []
+    },
     gadgets: null,
     pickaxes: null,
-    biomes: null,
+    biomes: ['forest'],
     skin: null,
 }

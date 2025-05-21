@@ -1,0 +1,151 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "35d45809-05de-4993-929d-b286a2872016",
+  "files": [
+    "__original-animation-0.cconb",
+    "__original-animation-1.cconb",
+    "__original-animation-2.cconb",
+    "__original-animation-3.cconb",
+    "__original-animation-4.cconb",
+    "__original-animation-5.cconb",
+    "__original-animation-6.cconb"
+  ],
+  "subMetas": {
+    "cbcd6": {
+      "importer": "gltf-mesh",
+      "uuid": "35d45809-05de-4993-929d-b286a2872016@cbcd6",
+      "displayName": "",
+      "id": "cbcd6",
+      "name": "Body.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 3050
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9d1d": {
+      "importer": "gltf-skeleton",
+      "uuid": "35d45809-05de-4993-929d-b286a2872016@f9d1d",
+      "displayName": "",
+      "id": "f9d1d",
+      "name": "Armature.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 15
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8c705": {
+      "importer": "gltf-scene",
+      "uuid": "35d45809-05de-4993-929d-b286a2872016@8c705",
+      "displayName": "",
+      "id": "8c705",
+      "name": "policeman.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "animationImportSettings": [
+      {
+        "name": "Fail",
+        "duration": 0.9166666865348816,
+        "fps": 30,
+        "splits": []
+      },
+      {
+        "name": "Idle",
+        "duration": 4.166666507720947,
+        "fps": 30,
+        "splits": []
+      },
+      {
+        "name": "Jump",
+        "duration": 0.375,
+        "fps": 30,
+        "splits": []
+      },
+      {
+        "name": "Ladder",
+        "duration": 0.6666666865348816,
+        "fps": 30,
+        "splits": []
+      },
+      {
+        "name": "Pressing",
+        "duration": 0.5,
+        "fps": 30,
+        "splits": []
+      },
+      {
+        "name": "Run",
+        "duration": 0.75,
+        "fps": 30,
+        "splits": []
+      },
+      {
+        "name": "T",
+        "duration": 0,
+        "fps": 30,
+        "splits": []
+      }
+    ],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "35d45809-05de-4993-929d-b286a2872016@cbcd6"
+      ],
+      "skeletons": [
+        "35d45809-05de-4993-929d-b286a2872016@f9d1d"
+      ],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "35d45809-05de-4993-929d-b286a2872016@8c705"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": true,
+      "compress": true
+    }
+  }
+}

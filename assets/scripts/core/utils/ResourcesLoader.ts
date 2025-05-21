@@ -1,4 +1,4 @@
-import {instantiate, Mesh, Node, Prefab, resources, Texture2D} from "cc";
+import {instantiate, JsonAsset, Mesh, Node, Prefab, resources, Texture2D} from "cc";
 
 export function loadAndInstantiatePrefab(path: string): Promise<Node> {
     return new Promise<Node>((resolve, reject) => {
@@ -34,6 +34,18 @@ export function loadTexture2D(path: string): Promise<Texture2D> {
             }
 
             resolve(texture);
+        });
+    });
+}
+
+export function loadJson<T>(path: string): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+        resources.load(path, JsonAsset, (err: Error, data: JsonAsset): void => {
+            if (err) {
+                reject(err);
+            }
+
+            resolve(data.json as T);
         });
     });
 }

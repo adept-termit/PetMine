@@ -1,10 +1,10 @@
-import { director, Scene } from 'cc';
+import {director, Scene} from 'cc';
 
 import {IState} from "db://assets/scripts/core/fsm/IState";
 import {EnumGameState, GameManager} from "db://assets/scripts/core/fsm/GameManager";
 import {gameLocalStorage} from "db://assets/scripts/core/storage/LocalStorage";
 import {EMPTY_PLAYER_PROGRESS} from "db://assets/scripts/core/storage/TPlayerProgress";
-import {loadAndInstantiatePrefab} from "db://assets/scripts/core/utils/ResourcesLoader";
+import {playerProgress} from "db://assets/scripts/core/storage/PlayerProgress";
 
 export class GameBootstrapperState implements IState {
     private gameManager: GameManager;
@@ -18,7 +18,6 @@ export class GameBootstrapperState implements IState {
     async onEnter() {
         this.loadSaves();
 
-        const camera = await this.instantiateCamera();
 
         this.gameManager.stateMachine.changeState(EnumGameState.Menu);
     }
@@ -33,21 +32,12 @@ export class GameBootstrapperState implements IState {
         const saves = gameLocalStorage.load();
 
         if (saves) {
-            this.gameManager.playerProgress = saves;
+            playerProgress.setProgress(saves);
             return;
         }
 
         gameLocalStorage.save(EMPTY_PLAYER_PROGRESS);
         this.gameManager.newGame = true;
-        this.gameManager.playerProgress = EMPTY_PLAYER_PROGRESS;
+        playerProgress.setProgress(EMPTY_PLAYER_PROGRESS);
     }
-
-    private async instantiateCamera(): Promise<OrbitCamera> {
-        const cameraNode = await loadAndInstantiatePrefab('character/playerCamera');
-
-        return cameraNode.getComponent(OrbitCamera);
-    }
-
-
-
 }

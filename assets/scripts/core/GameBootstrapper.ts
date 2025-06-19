@@ -9,7 +9,7 @@ export class GameBootstrapper extends Component {
     @property(Node) mainCamera: Node;
 
     onLoad(): void {
-        game.frameRate = sys.isMobile ? 60 : 120;
+        // game.frameRate = sys.isMobile ? 60 : 120;
 
         gameManager.cameraNode = this.mainCamera
 

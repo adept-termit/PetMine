@@ -1,0 +1,11 @@
+{
+  "data": [
+    { "name": "default", "damage": 1100 },
+    { "name": "default1", "damage": 1250 },
+    { "name": "default2", "damage": 600 },
+    { "name": "default3", "damage": 600 },
+    { "name": "default5", "damage": 600 },
+    { "name": "default6", "damage": 600 },
+    { "name": "default4", "damage": 600 }
+  ]
+}

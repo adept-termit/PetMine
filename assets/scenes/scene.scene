@@ -220,11 +220,11 @@
     "__prefab": null,
     "_projection": 1,
     "_priority": 0,
-    "_fov": 60,
+    "_fov": 80,
     "_fovAxis": 0,
     "_orthoHeight": 10,
     "_near": 0.01,
-    "_far": 450,
+    "_far": 650,
     "_color": {
       "__type__": "cc.Color",
       "r": 51,
@@ -267,14 +267,18 @@
     "offset": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 1.5,
+      "y": 0.5,
       "z": 0
     },
-    "distanceMin": 3,
-    "distanceMax": 12,
-    "pitchAngleMax": 78,
-    "pitchAngleMin": -78,
+    "distanceMin": 1,
+    "distanceMax": 10,
+    "pitchAngleMax": 75,
+    "pitchAngleMin": -75,
     "orbitSensitivity": 0.2,
+    "minCharacterViewDistance": 3,
+    "fovMin": 50,
+    "fovMax": 90,
+    "narrowSpaceThreshold": 2.5,
     "_id": "3f61JH4HZKQK/+Rym0pmxO"
   },
   {
@@ -343,7 +347,7 @@
     "asset": null,
     "fileId": "f75a8151-326f-483f-aae6-90404ab9a067",
     "instance": null,
-    "targetOverrides": []
+    "targetOverrides": null
   },
   {
     "__type__": "cc.SceneGlobals",

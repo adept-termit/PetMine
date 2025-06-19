@@ -2,7 +2,7 @@
   "ver": "2.3.13",
   "importer": "gltf",
   "imported": true,
-  "uuid": "ee5e18ee-93bd-43c8-ba1a-305a4298e63e",
+  "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b",
   "files": [
     "__original-animation-0.cconb",
     "__original-animation-1.cconb",
@@ -10,12 +10,13 @@
     "__original-animation-3.cconb",
     "__original-animation-4.cconb",
     "__original-animation-5.cconb",
-    "__original-animation-6.cconb"
+    "__original-animation-6.cconb",
+    "__original-animation-7.cconb"
   ],
   "subMetas": {
     "cbcd6": {
       "importer": "gltf-mesh",
-      "uuid": "ee5e18ee-93bd-43c8-ba1a-305a4298e63e@cbcd6",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@cbcd6",
       "displayName": "",
       "id": "cbcd6",
       "name": "Body.mesh",
@@ -31,9 +32,205 @@
       ],
       "subMetas": {}
     },
+    "1a9b0": {
+      "importer": "gltf-animation",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@1a9b0",
+      "displayName": "",
+      "id": "1a9b0",
+      "name": "Fail.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.9166666865348816
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "c2696": {
+      "importer": "gltf-animation",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@c2696",
+      "displayName": "",
+      "id": "c2696",
+      "name": "Idle.animation",
+      "userData": {
+        "gltfIndex": 1,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 4.166666507720947
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "f4113": {
+      "importer": "gltf-animation",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@f4113",
+      "displayName": "",
+      "id": "f4113",
+      "name": "Jump.animation",
+      "userData": {
+        "gltfIndex": 2,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.375
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "c9b2c": {
+      "importer": "gltf-animation",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@c9b2c",
+      "displayName": "",
+      "id": "c9b2c",
+      "name": "Ladder.animation",
+      "userData": {
+        "gltfIndex": 3,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.6666666865348816
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "fb7c0": {
+      "importer": "gltf-animation",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@fb7c0",
+      "displayName": "",
+      "id": "fb7c0",
+      "name": "Pick.animation",
+      "userData": {
+        "gltfIndex": 4,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.5
+        },
+        "events": [
+          {
+            "frame": 0.23333333333333334,
+            "func": "onPickaxeHit",
+            "params": []
+          }
+        ],
+        "embeddedPlayers": [],
+        "editorExtras": {
+          "embeddedPlayerGroups": []
+        },
+        "speed": 1,
+        "auxiliaryCurves": {}
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "92b9a": {
+      "importer": "gltf-animation",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@92b9a",
+      "displayName": "",
+      "id": "92b9a",
+      "name": "Pressing.animation",
+      "userData": {
+        "gltfIndex": 5,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.5
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "9292d": {
+      "importer": "gltf-animation",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@9292d",
+      "displayName": "",
+      "id": "9292d",
+      "name": "Run.animation",
+      "userData": {
+        "gltfIndex": 6,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.75
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "595fd": {
+      "importer": "gltf-animation",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@595fd",
+      "displayName": "",
+      "id": "595fd",
+      "name": "T.animation",
+      "userData": {
+        "gltfIndex": 7,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
     "f9d1d": {
       "importer": "gltf-skeleton",
-      "uuid": "ee5e18ee-93bd-43c8-ba1a-305a4298e63e@f9d1d",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@f9d1d",
       "displayName": "",
       "id": "f9d1d",
       "name": "Armature.skeleton",
@@ -48,11 +245,11 @@
       ],
       "subMetas": {}
     },
-    "7724c": {
+    "22a51": {
       "importer": "gltf-scene",
-      "uuid": "ee5e18ee-93bd-43c8-ba1a-305a4298e63e@7724c",
+      "uuid": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@22a51",
       "displayName": "",
-      "id": "7724c",
+      "id": "22a51",
       "name": "boy.prefab",
       "userData": {
         "gltfIndex": 0
@@ -72,43 +269,113 @@
         "name": "Fail",
         "duration": 0.9166666865348816,
         "fps": 30,
-        "splits": []
+        "splits": [
+          {
+            "name": "Fail",
+            "from": 0,
+            "to": 0.9166666865348816,
+            "wrapMode": 2,
+            "previousId": "1a9b0"
+          }
+        ]
       },
       {
         "name": "Idle",
         "duration": 4.166666507720947,
         "fps": 30,
-        "splits": []
+        "splits": [
+          {
+            "name": "Idle",
+            "from": 0,
+            "to": 4.166666507720947,
+            "wrapMode": 2,
+            "previousId": "c2696"
+          }
+        ]
       },
       {
         "name": "Jump",
         "duration": 0.375,
         "fps": 30,
-        "splits": []
+        "splits": [
+          {
+            "name": "Jump",
+            "from": 0,
+            "to": 0.375,
+            "wrapMode": 2,
+            "previousId": "f4113"
+          }
+        ]
       },
       {
         "name": "Ladder",
         "duration": 0.6666666865348816,
         "fps": 30,
-        "splits": []
+        "splits": [
+          {
+            "name": "Ladder",
+            "from": 0,
+            "to": 0.6666666865348816,
+            "wrapMode": 2,
+            "previousId": "c9b2c"
+          }
+        ]
+      },
+      {
+        "name": "Pick",
+        "duration": 0.5,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Pick",
+            "from": 0,
+            "to": 0.5,
+            "wrapMode": 2,
+            "previousId": "fb7c0"
+          }
+        ]
       },
       {
         "name": "Pressing",
         "duration": 0.5,
         "fps": 30,
-        "splits": []
+        "splits": [
+          {
+            "name": "Pressing",
+            "from": 0,
+            "to": 0.5,
+            "wrapMode": 2,
+            "previousId": "92b9a"
+          }
+        ]
       },
       {
         "name": "Run",
         "duration": 0.75,
         "fps": 30,
-        "splits": []
+        "splits": [
+          {
+            "name": "Run",
+            "from": 0,
+            "to": 0.75,
+            "wrapMode": 2,
+            "previousId": "9292d"
+          }
+        ]
       },
       {
         "name": "T",
         "duration": 0,
         "fps": 30,
-        "splits": []
+        "splits": [
+          {
+            "name": "T",
+            "from": 0,
+            "to": 0,
+            "wrapMode": 2,
+            "previousId": "595fd"
+          }
+        ]
       }
     ],
     "lods": {
@@ -131,21 +398,16 @@
     },
     "assetFinder": {
       "meshes": [
-        "ee5e18ee-93bd-43c8-ba1a-305a4298e63e@cbcd6"
+        "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@cbcd6"
       ],
       "skeletons": [
-        "ee5e18ee-93bd-43c8-ba1a-305a4298e63e@f9d1d"
+        "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@f9d1d"
       ],
       "textures": [],
       "materials": [],
       "scenes": [
-        "ee5e18ee-93bd-43c8-ba1a-305a4298e63e@7724c"
+        "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@22a51"
       ]
-    },
-    "meshCompress": {
-      "enable": true,
-      "encode": true,
-      "compress": true
     }
   }
 }

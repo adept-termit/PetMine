@@ -13,30 +13,45 @@ export class DesktopGame implements IInput {
     }
 
     enable(): void {
-        this._addEventListeners();
+        this.addInputEventListeners();
     }
 
     disable(): void {
-        this._removeEventListeners();
+        this.removeInputEventListeners();
     }
 
-    private _addEventListeners(): void {
+    private addInputEventListeners(): void {
+        //ввод с клавиатуры
         input.on(Input.EventType.KEY_DOWN, this._onKeyDown, this);
         input.on(Input.EventType.KEY_UP, this._onKeyUp, this);
 
-        input.on(Input.EventType.MOUSE_DOWN, this._onInput, this);
+        //ввод с мышки
+        input.on(Input.EventType.MOUSE_DOWN, this._onMouseDown, this);
+        input.on(Input.EventType.MOUSE_UP, this._onMouseUp, this);
+        input.on(Input.EventType.MOUSE_MOVE, this._onMouseMove, this);
     }
 
-    private _removeEventListeners(): void {
+    private removeInputEventListeners(): void {
+        //ввод с клавиатуры
         input.off(Input.EventType.KEY_DOWN, this._onKeyDown, this);
         input.off(Input.EventType.KEY_UP, this._onKeyUp, this);
 
-        input.off(Input.EventType.MOUSE_DOWN, this._onInput, this);
+        //ввод с мышки
+        input.off(Input.EventType.MOUSE_DOWN, this._onMouseDown, this);
+        input.off(Input.EventType.MOUSE_UP, this._onMouseUp, this);
+        input.off(Input.EventType.MOUSE_MOVE, this._onMouseMove, this);
     }
 
-    private _onInput(event: EventMouse) {
-        if (event.getButton() !== EventMouse.BUTTON_LEFT) return;
-        eventService.eventEmitter.emit('MOUSE_DOWN', event);
+    private _onMouseDown(event: EventMouse) {
+        if (event.getButton() == EventMouse.BUTTON_LEFT) this._inputMap.leftMouse = true;
+    }
+
+    private _onMouseUp(event: EventMouse) {
+        if (event.getButton() == EventMouse.BUTTON_LEFT) this._inputMap.leftMouse = false;
+    }
+
+    private _onMouseMove(event: EventMouse) {
+        event.getLocation(this._inputMap.mouseMove)
     }
 
     private _onKeyDown(kbEvent: EventKeyboard) {

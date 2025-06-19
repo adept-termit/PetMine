@@ -7,7 +7,7 @@ import {
     CCFloat,
     Vec3,
     geometry,
-    PhysicsSystem, EPhysicsDrawFlags
+    PhysicsSystem, EPhysicsDrawFlags, Camera
 } from 'cc';
 import {AbstractInput, Desktop, Mobile} from "db://assets/scripts/camera/Input";
 
@@ -25,6 +25,18 @@ export class orbit extends Component {
     @property({type: CCFloat, tooltip: "Мин угол наклона (градусы)"}) pitchAngleMin: number = -90;
 
     @property({type: CCFloat, tooltip: "Как быстро камера движется по орбите"}) orbitSensitivity: number = 0.2;
+
+    @property({type: CCFloat})
+    minCharacterViewDistance: number = 3; // Минимальное расстояние, чтобы персонаж влезал в кадр
+
+    @property({type: CCFloat})
+    fovMin: number = 80;
+
+    @property({type: CCFloat})
+    fovMax: number = 80;
+
+    @property({type: CCFloat})
+    narrowSpaceThreshold: number = 1.2; // если расстояние до препятствия < этого, считаем, что пространство узкое
 
     private _focusEntity: Node;
     private _currentInput: AbstractInput;
@@ -101,17 +113,25 @@ export class orbit extends Component {
 
     _obstacleAvoidance() {
         const focus = this._focusEntity.getWorldPosition().add(this.offset);
+
         const camera = new Vec3(this.node.worldPosition).subtract(focus).normalize();
 
         this._ray = new geometry.Ray(focus.x, focus.y, focus.z, camera.x, camera.y, camera.z);
 
         const sphereRadius = 0.1
         const halfSphereRadius = sphereRadius * 0.5
-        const result = PhysicsSystem.instance.sweepSphereClosest(this._ray, sphereRadius, PhysicsSystem.PhysicsGroup.WORLD_STATIC | PhysicsSystem.PhysicsGroup.CHUNK_BLOCK, this._distance - halfSphereRadius, false);
+        const result = PhysicsSystem.instance.sweepSphereClosest(
+            this._ray,
+            sphereRadius,
+            PhysicsSystem.PhysicsGroup.WORLD_STATIC | PhysicsSystem.PhysicsGroup.CHUNK_BLOCK,
+            this._distance - halfSphereRadius,
+            false
+        );
 
         if (result) {
             const sweepResult = PhysicsSystem.instance.sweepCastClosestResult;
             const hitDistance = sweepResult.distance;
+
             this._obstacleAvoidanceDistance = hitDistance - halfSphereRadius;
         } else {
             this._obstacleAvoidanceDistance = this.distanceMax;
@@ -119,6 +139,7 @@ export class orbit extends Component {
     }
 
     private _updatePosition() {
+
         let position = this.node.getPosition();
 
         const distance = Math.min(this._distance, this._obstacleAvoidanceDistance);

@@ -8,6 +8,16 @@ export type BiomeBlockMap = {
     };
 };
 
+export type Skin = {
+    id: string;
+    price: number;
+    damage: number;
+};
+
+export type SkinMap = {
+    [id: string]: Skin;
+};
+
 export class WorldData {
     public depthSettings: { 'rare': number, 'legendary': number } = {
         'rare': 14,

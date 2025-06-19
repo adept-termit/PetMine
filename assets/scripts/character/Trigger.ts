@@ -1,5 +1,6 @@
 import {_decorator, Collider, Component, ITriggerEvent, Node, PhysicsSystem, Prefab} from 'cc';
 import {worldData} from "db://assets/scripts/biomes/WorldData";
+import {eventService} from "db://assets/scripts/core/utils/EventService";
 
 const {ccclass, property} = _decorator;
 
@@ -29,11 +30,13 @@ export class Trigger extends Component {
         const currentBiome = event.otherCollider.node.getParent().name
         if (worldData.currentBiome != currentBiome) {
             worldData.currentBiome = currentBiome
+            eventService.eventEmitter.emit("PETS_SET_STATE", "mine");
         }
     }
 
     private _onTriggerExit(event: ITriggerEvent) {
-        worldData.currentBiome = null
+        // worldData.currentBiome = null
+        eventService.eventEmitter.emit("PETS_SET_STATE", "follow");
     }
 }
 

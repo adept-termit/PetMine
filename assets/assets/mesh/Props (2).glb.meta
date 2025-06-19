@@ -1,0 +1,132 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "f3639129-5dee-4a6b-93c1-8eae46c96166",
+  "files": [],
+  "subMetas": {
+    "fb3dd": {
+      "importer": "gltf-mesh",
+      "uuid": "f3639129-5dee-4a6b-93c1-8eae46c96166@fb3dd",
+      "displayName": "",
+      "id": "fb3dd",
+      "name": "Road Pit.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 240
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0c4eb": {
+      "importer": "gltf-mesh",
+      "uuid": "f3639129-5dee-4a6b-93c1-8eae46c96166@0c4eb",
+      "displayName": "",
+      "id": "0c4eb",
+      "name": "pit.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 226
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "01e85": {
+      "importer": "gltf-mesh",
+      "uuid": "f3639129-5dee-4a6b-93c1-8eae46c96166@01e85",
+      "displayName": "",
+      "id": "01e85",
+      "name": "Road Straight.mesh",
+      "userData": {
+        "gltfIndex": 2,
+        "triangleCount": 14
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8cfdc": {
+      "importer": "gltf-mesh",
+      "uuid": "f3639129-5dee-4a6b-93c1-8eae46c96166@8cfdc",
+      "displayName": "",
+      "id": "8cfdc",
+      "name": "Road Сircle.mesh",
+      "userData": {
+        "gltfIndex": 3,
+        "triangleCount": 118
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "52c26": {
+      "importer": "gltf-scene",
+      "uuid": "f3639129-5dee-4a6b-93c1-8eae46c96166@52c26",
+      "displayName": "",
+      "id": "52c26",
+      "name": "Props (2).prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "f3639129-5dee-4a6b-93c1-8eae46c96166@fb3dd",
+        "f3639129-5dee-4a6b-93c1-8eae46c96166@0c4eb",
+        "f3639129-5dee-4a6b-93c1-8eae46c96166@01e85",
+        "f3639129-5dee-4a6b-93c1-8eae46c96166@8cfdc"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "f3639129-5dee-4a6b-93c1-8eae46c96166@52c26"
+      ]
+    }
+  }
+}

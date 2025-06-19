@@ -46,6 +46,7 @@ export type TPlayerProgress = {
     pickaxes: string[];
     biomes: string[];
     skin: string[];
+    openSlotPets: number;
 };
 
 export const EMPTY_PLAYER_PROGRESS: TPlayerProgress = {
@@ -61,12 +62,13 @@ export const EMPTY_PLAYER_PROGRESS: TPlayerProgress = {
     pets: null,
     selected: {
         skin: null,
-        pets: [],
-        pickaxe: 'basic',
+        pets: ['default'],
+        pickaxe: 'default',
         gadgets: []
     },
     gadgets: null,
     pickaxes: null,
     biomes: ['forest'],
     skin: null,
+    openSlotPets: 3,
 }

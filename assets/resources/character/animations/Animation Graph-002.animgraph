@@ -8,17 +8,29 @@
     "_layers": [
       {
         "__id__": 1
+      },
+      {
+        "__id__": 62
       }
     ],
     "_variables": {
       "IsWalk": {
-        "__id__": 62
+        "__id__": 80
       },
       "IsJump": {
-        "__id__": 63
+        "__id__": 81
       },
       "IsFall": {
-        "__id__": 64
+        "__id__": 82
+      },
+      "IsMine": {
+        "__id__": 83
+      },
+      "IsMineTrigger": {
+        "__id__": 84
+      },
+      "Float": {
+        "__id__": 85
       }
     }
   },
@@ -105,8 +117,8 @@
       "name": "",
       "id": "5927805e-f38b-48ee-ac82-5bd67bee7655",
       "clone": null,
-      "centerX": -66.52958152958149,
-      "centerY": -173.25541125541125
+      "centerX": -87.72802738276573,
+      "centerY": 14.981999852582874
     },
     "name": "Entry"
   },
@@ -127,8 +139,8 @@
       "name": "",
       "id": "9b163f14-746f-4d9a-9908-529367415c35",
       "clone": null,
-      "centerX": 125.05916305916298,
-      "centerY": -80.20057720057724
+      "centerX": -513.8676544334483,
+      "centerY": 80.29084774963616
     },
     "name": "Any"
   },
@@ -138,8 +150,8 @@
       "name": "Idle",
       "id": "11847096-fc35-4d7b-a2d8-239a5a2d5f4b",
       "clone": null,
-      "centerX": -66.15945165945175,
-      "centerY": -81.87157287157294
+      "centerX": -326.3293773755012,
+      "centerY": 14.517699008447835
     },
     "name": "Idle",
     "_components": [],
@@ -164,7 +176,7 @@
       "clone": null
     },
     "clip": {
-      "__uuid__": "b15f936c-bf72-4a5e-8b04-a9dc27c48a41@c2696",
+      "__uuid__": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@c2696",
       "__expectedType__": "cc.AnimationClip"
     }
   },
@@ -182,8 +194,8 @@
       "name": "Walk",
       "id": "69471ff1-1483-44b1-af9f-8d0f4c052f9e",
       "clone": null,
-      "centerX": -65.52977141673443,
-      "centerY": 13.546936299377705
+      "centerX": -246.03240158091137,
+      "centerY": 74.97893952606827
     },
     "name": "Walk",
     "_components": [],
@@ -208,7 +220,7 @@
       "clone": null
     },
     "clip": {
-      "__uuid__": "b15f936c-bf72-4a5e-8b04-a9dc27c48a41@9292d",
+      "__uuid__": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@9292d",
       "__expectedType__": "cc.AnimationClip"
     }
   },
@@ -226,8 +238,8 @@
       "name": "Jump",
       "id": "e87920f9-da06-423e-a013-54df141640fc",
       "clone": null,
-      "centerX": 31.01329903938006,
-      "centerY": -47.460655142996245
+      "centerX": -397.9561284708142,
+      "centerY": 154.0028555787256
     },
     "name": "Jump",
     "_components": [],
@@ -252,7 +264,7 @@
       "clone": null
     },
     "clip": {
-      "__uuid__": "b15f936c-bf72-4a5e-8b04-a9dc27c48a41@f4113",
+      "__uuid__": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@f4113",
       "__expectedType__": "cc.AnimationClip"
     }
   },
@@ -270,8 +282,8 @@
       "name": "Fail",
       "id": "ca221637-18a2-47f3-9d33-d1aba7f87395",
       "clone": null,
-      "centerX": 29.217703330740505,
-      "centerY": -111.54685879441729
+      "centerX": -442.99195137877547,
+      "centerY": 14.592290671134208
     },
     "name": "Fail",
     "_components": [],
@@ -296,7 +308,7 @@
       "clone": null
     },
     "clip": {
-      "__uuid__": "b15f936c-bf72-4a5e-8b04-a9dc27c48a41@1a9b0",
+      "__uuid__": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@1a9b0",
       "__expectedType__": "cc.AnimationClip"
     }
   },
@@ -679,6 +691,236 @@
     "methodName": ""
   },
   {
+    "__type__": "cc.animation.Layer",
+    "_stateMachine": {
+      "__id__": 63
+    },
+    "name": "UpperBody",
+    "weight": 1,
+    "mask": {
+      "__uuid__": "f40232a5-3a11-4e86-9867-0f04cb5d295c",
+      "__expectedType__": "cc.animation.AnimationMask"
+    },
+    "additive": false,
+    "_stashes": {}
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "name": "",
+      "id": "2a43b411-e7cb-4d62-976a-42aed698815b",
+      "clone": null
+    },
+    "_states": [
+      {
+        "__id__": 64
+      },
+      {
+        "__id__": 65
+      },
+      {
+        "__id__": 66
+      },
+      {
+        "__id__": 67
+      },
+      {
+        "__id__": 71
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 72
+      },
+      {
+        "__id__": 75
+      },
+      {
+        "__id__": 79
+      }
+    ],
+    "_entryState": {
+      "__id__": 64
+    },
+    "_exitState": {
+      "__id__": 65
+    },
+    "_anyState": {
+      "__id__": 66
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "name": "",
+      "id": "1a367f34-6098-40b6-b095-cc2862844ffc",
+      "clone": null,
+      "centerX": -36,
+      "centerY": 14
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "name": "",
+      "id": "a7c32e00-25a3-4c7b-8f06-92a12b49a2b0",
+      "clone": null,
+      "centerX": 125,
+      "centerY": 0
+    },
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "name": "",
+      "id": "975cc93b-6d7d-4540-9871-b52bd9cf5dd1",
+      "clone": null,
+      "centerX": 174,
+      "centerY": 40
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "Mine",
+      "id": "6829fd56-e41e-4e2d-aae0-d42474db207e",
+      "clone": null,
+      "centerX": -33.0625,
+      "centerY": -79
+    },
+    "name": "Mine",
+    "_components": [],
+    "motion": {
+      "__id__": 68
+    },
+    "speed": 1,
+    "speedMultiplier": "Float",
+    "speedMultiplierEnabled": true,
+    "transitionInEventBinding": {
+      "__id__": 69
+    },
+    "transitionOutEventBinding": {
+      "__id__": 70
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "637e645c-88b3-4ab8-bda6-fd8c809d3cd8",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "d6cd87cf-b000-4694-b1c1-8220cc2e2e8b@fb7c0",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.EmptyState",
+    "__editorExtras__": {
+      "name": "",
+      "id": "555ffd77-4776-463f-b3ee-e785a564da64",
+      "clone": null,
+      "centerX": 221.9375,
+      "centerY": -81.984375
+    },
+    "name": "Empty"
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "__editorExtras__": null,
+    "from": {
+      "__id__": 67
+    },
+    "to": {
+      "__id__": 71
+    },
+    "conditions": [],
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "startEventBinding": {
+      "__id__": 73
+    },
+    "endEventBinding": {
+      "__id__": 74
+    },
+    "duration": 0.1,
+    "relativeDuration": true,
+    "exitConditionEnabled": true,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.EmptyStateTransition",
+    "__editorExtras__": null,
+    "from": {
+      "__id__": 71
+    },
+    "to": {
+      "__id__": 67
+    },
+    "conditions": [
+      {
+        "__id__": 76
+      }
+    ],
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "startEventBinding": {
+      "__id__": 77
+    },
+    "endEventBinding": {
+      "__id__": 78
+    },
+    "duration": 0.3
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "IsMineTrigger"
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "__editorExtras__": null,
+    "from": {
+      "__id__": 64
+    },
+    "to": {
+      "__id__": 71
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 1,
+    "_value": false
+  },
+  {
     "__type__": "cc.animation.PlainVariable",
     "_type": 1,
     "_value": false
@@ -692,5 +934,14 @@
     "__type__": "cc.animation.PlainVariable",
     "_type": 1,
     "_value": false
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 0
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 0,
+    "_value": 2
   }
 ]

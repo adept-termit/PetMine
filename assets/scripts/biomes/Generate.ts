@@ -32,38 +32,44 @@ export class Generate extends Component {
         eventService.eventEmitter.off('DROP_BLOCK', this.dropBlock, this);
     }
 
-
     init(chunk: Node, blocksRarity: object, biomeName: string, width: number, height: number) {
 
         this.blocksRarity = blocksRarity;
 
         const chunkData = new ChunkData();
 
+        // blocksMap: Map<Y, Map<X, Map<Z, Node>>>
+        const blocksMap = new Map<number, Map<number, Map<number, Node>>>();
+
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
                 for (let z = 0; z < width; z++) {
 
-                    let blockName = this.getRandomBlockName(y);
-                    const blockPos = this.blockPos.set(x, y, z).add(this.customOffset)
+                    const blockName = this.getRandomBlockName(y);
+                    const blockPos = this.blockPos.set(x, y, z).add(this.customOffset);
 
                     const entity = poolService.allocBlock(blockName);
-                    entity.setPosition(blockPos)
-                    chunk.addChild(entity)
+                    entity.setPosition(blockPos);
+                    chunk.addChild(entity);
 
                     if (y >= height - 2) {
-                        entity.active = true
+                        entity.active = true;
                     }
 
-                    if (!this.blocksInChunkByPos[blockPos.y]) this.blocksInChunkByPos[blockPos.y] = [];
-                    if (!this.blocksInChunkByPos[blockPos.y][blockPos.x]) this.blocksInChunkByPos[blockPos.y][blockPos.x] = [];
+                    const yMap = blocksMap.get(blockPos.y) ?? new Map();
+                    const xMap = yMap.get(blockPos.x) ?? new Map();
 
-                    this.blocksInChunkByPos[blockPos.y][blockPos.x][blockPos.z] = entity;
+                    xMap.set(blockPos.z, entity);
+                    yMap.set(blockPos.x, xMap);
+
+                    blocksMap.set(blockPos.y, yMap);
                 }
             }
         }
 
         chunkData.chunkNode = chunk;
-        chunkData.blocksInChunkByPos = this.blocksInChunkByPos;
+        chunkData.blocksInChunkByPos = blocksMap;
+
         worldData.pushChunkBiomeDictionary(biomeName, chunkData);
     }
 
@@ -99,7 +105,7 @@ export class Generate extends Component {
 
     private getBlockAtPosition(chunkData: ChunkData, x: number, y: number, z: number): Node | undefined {
 
-        return chunkData.blocksInChunkByPos[y]?.[x]?.[z];
+        return chunkData.blocksInChunkByPos.get(y)?.get(x)?.get(z);
     }
 
     private dropBlock(chunkData: ChunkData, block: Node) {
@@ -109,7 +115,22 @@ export class Generate extends Component {
         block.removeFromParent();
         poolService.freeBlock(block.name, block);
 
-        delete chunkData.blocksInChunkByPos[y]?.[x]?.[z];
+        const yMap = chunkData.blocksInChunkByPos.get(y);
+        if (!yMap) return;
+
+        const xMap = yMap.get(x);
+        if (!xMap) return;
+
+        xMap.delete(z); // Удаляем Z
+
+
+        if (xMap.size === 0) {
+            yMap.delete(x); // Удаляем X если пуст
+        }
+
+        if (yMap.size === 0) {
+            chunkData.blocksInChunkByPos.delete(y); // Удаляем Y если пуст
+        }
     }
 }
 

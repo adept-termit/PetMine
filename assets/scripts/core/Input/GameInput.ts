@@ -1,4 +1,4 @@
-import {sys, Vec3} from 'cc';
+import {sys, Vec2, Vec3} from 'cc';
 import {IInput} from "db://assets/scripts/core/Input/IInput";
 import {DesktopGame} from "db://assets/scripts/core/Input/DesktopGame";
 
@@ -8,6 +8,8 @@ export type TInputMap = {
     back: boolean;
     left: boolean;
     jump: boolean;
+    leftMouse: boolean;
+    mouseMove: Vec2;
 }
 
 export class GameInput {
@@ -17,6 +19,8 @@ export class GameInput {
         back: false,
         left: false,
         jump: false,
+        leftMouse: false,
+        mouseMove: new Vec2()
     };
     private _currentInput: IInput;
 
@@ -57,6 +61,14 @@ export class GameInput {
 
     get isJumpPressed(): boolean {
         return this._inputMap.jump;
+    }
+
+    get isLeftMousePressed(): boolean {
+        return this._inputMap.leftMouse;
+    }
+
+    get mouseMoveVector(): Vec2 {
+        return this._inputMap.mouseMove;
     }
 }
 

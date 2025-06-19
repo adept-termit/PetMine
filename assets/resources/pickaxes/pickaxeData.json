@@ -1,6 +1,6 @@
 {
   "skins": [
-    { "id": "basic", "price": 0, "damage": 10},
+    { "id": "default", "price": 0, "damage": 10},
     { "id": "iron", "price": 10, "damage": 20}
   ]
 }

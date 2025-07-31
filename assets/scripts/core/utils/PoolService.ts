@@ -20,7 +20,6 @@ export class PoolService {
 
             this.pools.set(typeBlock.name, pool);
         });
-
     }
 
     /** Получить пул по имени блока */

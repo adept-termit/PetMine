@@ -26,6 +26,11 @@ export class orbit extends Component {
 
     @property({type: CCFloat, tooltip: "Как быстро камера движется по орбите"}) orbitSensitivity: number = 0.2;
 
+
+    @property({type: CCFloat, tooltip: "Начальный угол поворота (вокруг вертикали)"}) startYaw: number = 0;
+    @property({type: CCFloat, tooltip: "Начальный угол наклона камеры (вниз/вверх)"}) startPitch: number = -10;
+    @property({type: CCFloat, tooltip: "Начальное расстояние до объекта"}) startDistance: number = 5;
+
     @property({type: CCFloat})
     minCharacterViewDistance: number = 3; // Минимальное расстояние, чтобы персонаж влезал в кадр
 
@@ -85,10 +90,14 @@ export class orbit extends Component {
             PhysicsSystem.instance.debugDrawFlags = EPhysicsDrawFlags.WIRE_FRAME | EPhysicsDrawFlags.AABB;
         }
 
-        this._distance = this.distanceMax;
-        this._obstacleAvoidanceDistance = this.distanceMax;
+        this._yaw = this.startYaw;
+        this._pitch = this.startPitch;
+        this._distance = math.clamp(this.startDistance, this.distanceMin, this.distanceMax);
+        this._obstacleAvoidanceDistance = this._distance;
 
         this._currentInput = sys.isMobile === true ? new Mobile(this) : new Desktop(this);
+
+        this._updatePosition();
     }
 
     onEnable() {

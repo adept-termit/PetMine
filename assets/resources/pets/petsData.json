@@ -6,6 +6,8 @@
     { "name": "default3", "damage": 600 },
     { "name": "default5", "damage": 600 },
     { "name": "default6", "damage": 600 },
-    { "name": "default4", "damage": 600 }
+    { "name": "default4", "damage": 600 },
+    { "name": "default7", "damage": 600 },
+    { "name": "default8", "damage": 600 }
   ]
 }

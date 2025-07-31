@@ -88,7 +88,6 @@ export class Character extends Component {
         this.pickaxeTool.applyDamageToCurrentBlock(this.targetBlockForHit, this.currentPickaxeDamage);
 
         this.hasAppliedDamageThisSwing = true;
-
         this.targetBlockForHit = undefined;
     }
 

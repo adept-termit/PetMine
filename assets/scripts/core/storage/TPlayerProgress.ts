@@ -63,7 +63,7 @@ export const EMPTY_PLAYER_PROGRESS: TPlayerProgress = {
     selected: {
         skin: null,
         // pets: ['default', 'default1', 'default2', 'default3', 'default4', 'default5', 'default6'],
-        pets: ['default', 'default1'],
+        pets: ['default', 'default1', 'default2',],
         pickaxe: 'default',
         gadgets: []
     },

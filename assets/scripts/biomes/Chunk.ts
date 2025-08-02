@@ -284,6 +284,7 @@ export class Chunk extends Eventify(Component) {
         const triggerName = event.selfCollider.node.name;
 
         if (triggerName === "Trigger Active Chunk") {
+            console.log(this)
             blockProvider.setActiveChunk(this);
         }
 
@@ -292,6 +293,7 @@ export class Chunk extends Eventify(Component) {
         }
 
         if (triggerName === "Trigger Activate Pet") {
+            console.log(true)
             globalData.triggerActivatePet = true;
         }
     }
@@ -304,6 +306,7 @@ export class Chunk extends Eventify(Component) {
         }
 
         if (triggerName === "Trigger Activate Pet") {
+            console.log(false)
             globalData.triggerActivatePet = false;
         }
     }

@@ -25,6 +25,10 @@ export class BlockProvider {
         return null;
     }
 
+    releaseBlock(block: Block) {
+        this._occupiedBlocks.delete(block);
+    }
+
     private _onBlockDestroyed(block: Block) {
         this._occupiedBlocks.delete(block);
     }

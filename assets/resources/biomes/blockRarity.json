@@ -15,6 +15,22 @@
       "common": 70
     }
   },
+  "Test Biome": {
+  "blocks": {
+    "legendary": ["Stone Block Diamond Crystal", "Diamond Block Crystal"],
+    "rare": ["Stone Block White Crystal", "Stone Block Red Crystal"],
+    "common": ["Ground Block", "Stone Block"]
+  },
+  "depthSettings": {
+    "legendary": 4,
+    "rare": 14
+  },
+  "chances": {
+    "legendary": 20,
+    "rare": 10,
+    "common": 70
+  }
+},
   "Desert Biome": {
     "blocks": {
       "legendary": ["Stone Block Diamond Crystal", "Diamond Block Crystal"],

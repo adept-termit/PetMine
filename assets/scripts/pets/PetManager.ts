@@ -2,7 +2,6 @@ import {_decorator, Component, instantiate, Node, Quat, Vec3} from 'cc';
 
 import {loadJson, loadMesh, loadTexture2D} from "db://assets/scripts/core/utils/ResourcesLoader";
 import {playerProgress} from "db://assets/scripts/core/storage/PlayerProgress";
-import {PetController} from "db://assets/scripts/pets/PetController";
 import {Pet} from "db://assets/scripts/pets/Pet";
 
 const {ccclass, property} = _decorator;

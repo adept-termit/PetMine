@@ -5,12 +5,10 @@ import {PetState} from "db://assets/scripts/pets/fsm/PetFSM";
 const OFFSET = new Vec3(0, 1.5, 0);
 
 export class MoveState extends PetStateBase {
-
     private _reachedTarget: boolean = false;
 
     enter() {
         this._reachedTarget = false;
-
     }
 
     update(dt: number): void {

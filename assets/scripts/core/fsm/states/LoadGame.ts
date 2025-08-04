@@ -29,6 +29,7 @@ export class LoadGame implements IState {
         await this._createCharacter();
         await this._createPets();
         await this._createProps();
+        await this._createUI();
     }
 
     public onExit() {
@@ -87,6 +88,12 @@ export class LoadGame implements IState {
         const dynamitePrefab = await loadPrefab(`props/Dynamite`);
 
         inventoryManager.addItem(new DynamiteItem(dynamitePrefab));
+    }
+
+    private async _createUI() {
+        const hud = await loadAndInstantiatePrefab(`ui/HUD`);
+        this._scene.getChildByName('Canvas').addChild(hud);
+        // this._scene.addChild(hud);
     }
 }
 

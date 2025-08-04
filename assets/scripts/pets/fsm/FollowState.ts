@@ -2,6 +2,9 @@ import { PetStateBase } from "./PetStateBase";
 import { Vec3, Quat } from "cc";
 
 export class FollowState extends PetStateBase {
+    enter(): void { }
+    exit(): void { }
+
     update(dt: number): void {
         const character = this.pet.characterNode;
         if (!character) return;

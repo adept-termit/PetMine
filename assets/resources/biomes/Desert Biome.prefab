@@ -282,7 +282,7 @@
       "0"
     ],
     "value": {
-      "__uuid__": "8134d226-dc56-4b6c-a7f1-ee3ab5675395",
+      "__uuid__": "f1237faf-3073-414e-90b1-cbca72516f4b",
       "__expectedType__": "cc.Material"
     }
   },
@@ -2391,7 +2391,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Trigger Activete Pet",
+    "_name": "Trigger Activate Pet",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -3319,7 +3319,7 @@
     "_size": {
       "__type__": "cc.Vec3",
       "x": 2.93,
-      "y": 1,
+      "y": 1.229,
       "z": 2.232
     },
     "_id": ""
@@ -3412,7 +3412,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": -23
+      "z": 23
     },
     "blocksPrefab": {
       "__id__": 18

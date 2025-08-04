@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "ab9bbdcd-2379-4f70-af7b-121a7551b8f7",
+  "uuid": "8fee9bc0-210d-4258-986f-65ec935b750e",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Desert Biome"
+    "syncNodeName": "HUD"
   }
 }

@@ -22,16 +22,6 @@ export class Generate extends Component {
         [0, 0, -1], // Назад
     ];
 
-    onEnable() {
-        eventService.eventEmitter.on('SPAWN_BLOCKS_AROUND_BLOCK', this.spawnAroundBlock, this);
-        eventService.eventEmitter.on('DROP_BLOCK', this.dropBlock, this);
-    }
-
-    onDisable() {
-        eventService.eventEmitter.off('SPAWN_BLOCKS_AROUND_BLOCK', this.spawnAroundBlock, this);
-        eventService.eventEmitter.off('DROP_BLOCK', this.dropBlock, this);
-    }
-
     init(chunk: Node, blocksRarity: object, biomeName: string, width: number, height: number) {
 
         this.blocksRarity = blocksRarity;
@@ -74,7 +64,6 @@ export class Generate extends Component {
     }
 
     private getRandomBlockName(depth: number) {
-        //с расчетом что базовая глубина 20, можно менять в worldData.depthSettings
         const randValue = Math.random() * 100;
 
         if (depth <= worldData.depthSettings.legendary) {

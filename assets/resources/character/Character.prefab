@@ -1316,7 +1316,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 5.551115189300232e-16,
       "z": 0
     },
     "_lrot": {
@@ -1355,7 +1355,7 @@
       "__id__": 46
     },
     "_material": null,
-    "_isTrigger": true,
+    "_isTrigger": false,
     "_center": {
       "__type__": "cc.Vec3",
       "x": 0,

@@ -5,6 +5,22 @@
   "uuid": "26f951b5-1885-487c-9e6b-0d477989054c",
   "files": [],
   "subMetas": {
+    "11aec": {
+      "importer": "gltf-scene",
+      "uuid": "26f951b5-1885-487c-9e6b-0d477989054c@11aec",
+      "displayName": "",
+      "id": "11aec",
+      "name": "Pit.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
     "97ff1": {
       "importer": "gltf-mesh",
       "uuid": "26f951b5-1885-487c-9e6b-0d477989054c@97ff1",
@@ -23,12 +39,12 @@
       ],
       "subMetas": {}
     },
-    "11aec": {
+    "31ae0": {
       "importer": "gltf-scene",
-      "uuid": "26f951b5-1885-487c-9e6b-0d477989054c@11aec",
+      "uuid": "26f951b5-1885-487c-9e6b-0d477989054c@31ae0",
       "displayName": "",
-      "id": "11aec",
-      "name": "Pit.prefab",
+      "id": "31ae0",
+      "name": "pit.prefab",
       "userData": {
         "gltfIndex": 0
       },
@@ -68,7 +84,7 @@
       "textures": [],
       "materials": [],
       "scenes": [
-        "26f951b5-1885-487c-9e6b-0d477989054c@11aec"
+        "26f951b5-1885-487c-9e6b-0d477989054c@31ae0"
       ]
     }
   }

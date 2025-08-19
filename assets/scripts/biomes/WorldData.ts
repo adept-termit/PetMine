@@ -1,6 +1,5 @@
 import {ChunkData} from "db://assets/scripts/biomes/ChunkData";
 
-type Rarity = 'Legendary' | 'Rare' | 'Common';
 
 export type BiomeBlockMap = {
     [biome: string]: {
@@ -8,8 +7,26 @@ export type BiomeBlockMap = {
     };
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export type Skin = {
     id: string;
+    name: string;
     price: number;
     damage: number;
 };

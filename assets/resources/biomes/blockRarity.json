@@ -1,17 +1,50 @@
 {
-  "forest": {
-    "legendary": ["stone_dmnd_crst", "stone_dmnd_crsta"],
-    "rare": ["stone_red_crst", "stone_white_crst"],
-    "common": ["stone", "ground"]
+  "Forest Biome": {
+    "blocks": {
+      "legendary": ["Stone Block Diamond Crystal", "Diamond Block Crystal"],
+      "rare": ["Stone Block White Crystal", "Stone Block Red Crystal"],
+      "common": ["Ground Block", "Stone Block"]
+    },
+    "depthSettings": {
+      "legendary": 4,
+      "rare": 14
+    },
+    "chances": {
+      "legendary": 20,
+      "rare": 10,
+      "common": 70
+    }
   },
-  "desert": {
-    "legendary": ["sun_relic", "golden_scarab"],
-    "rare": ["sandstone", "cactus"],
-    "common": ["sand", "dry_dirt"]
+  "Test Biome": {
+  "blocks": {
+    "legendary": ["Stone Block Diamond Crystal", "Diamond Block Crystal"],
+    "rare": ["Stone Block White Crystal", "Stone Block Red Crystal"],
+    "common": ["Ground Block", "Stone Block"]
   },
-  "mountains": {
-    "legendary": ["dragon_egg", "magic_ore"],
-    "rare": ["iron_ore", "coal_vein"],
-    "common": ["rock", "gravel"]
+  "depthSettings": {
+    "legendary": 4,
+    "rare": 14
+  },
+  "chances": {
+    "legendary": 20,
+    "rare": 10,
+    "common": 70
+  }
+},
+  "Desert Biome": {
+    "blocks": {
+      "legendary": ["Stone Block Diamond Crystal", "Diamond Block Crystal"],
+      "rare": ["Stone Block White Crystal", "Stone Block Red Crystal"],
+      "common": ["Ground Block", "Stone Block"]
+    },
+    "depthSettings": {
+      "legendary": 4,
+      "rare": 14
+    },
+    "chances": {
+      "legendary": 20,
+      "rare": 10,
+      "common": 70
+    }
   }
 }

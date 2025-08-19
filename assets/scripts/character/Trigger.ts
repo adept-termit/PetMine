@@ -1,6 +1,8 @@
 import {_decorator, Collider, Component, ITriggerEvent, Node, PhysicsSystem, Prefab} from 'cc';
 import {worldData} from "db://assets/scripts/biomes/WorldData";
 import {eventService} from "db://assets/scripts/core/utils/EventService";
+import {blockProvider} from "db://assets/scripts/biomes/BlockProvider";
+import {Chunk} from "db://assets/scripts/biomes/Chunk";
 
 const {ccclass, property} = _decorator;
 
@@ -27,16 +29,14 @@ export class Trigger extends Component {
     }
 
     private _onTriggerEnter(event: ITriggerEvent) {
-        const currentBiome = event.otherCollider.node.getParent().name
-        if (worldData.currentBiome != currentBiome) {
-            worldData.currentBiome = currentBiome
-            eventService.eventEmitter.emit("PETS_SET_STATE", "mine");
-        }
+
+        // console.log( event.otherCollider.node.getParent().getComponent(Chunk))
+        // event.otherCollider.node.getParent().getComponent(Chunk)
+        // blockProvider.setActiveChunk(event.otherCollider.node.getParent().getComponent(Chunk));
     }
 
     private _onTriggerExit(event: ITriggerEvent) {
         // worldData.currentBiome = null
-        eventService.eventEmitter.emit("PETS_SET_STATE", "follow");
     }
 }
 

@@ -49,3 +49,15 @@ export function loadJson<T>(path: string): Promise<T> {
         });
     });
 }
+
+export function loadPrefab(path: string): Promise<Prefab> {
+    return new Promise<Prefab>((resolve, reject) => {
+        resources.load(path, Prefab, (err, prefab) => {
+            if (err) {
+                reject(err);
+            }
+
+            resolve(prefab);
+        });
+    });
+}

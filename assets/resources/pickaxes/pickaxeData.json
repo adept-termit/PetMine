@@ -1,6 +1,28 @@
 {
   "skins": [
-    { "id": "default", "price": 0, "damage": 10},
-    { "id": "iron", "price": 10, "damage": 20}
+    {
+      "id": "default",
+      "name": "default",
+      "price": 0,
+      "damage": 10
+    },
+    {
+      "id": "wood",
+      "name": "wood",
+      "price": 200,
+      "damage": 200
+    },
+    {
+      "id": "minecraft",
+      "name": "minecraft",
+      "price": 888,
+      "damage": 888
+    },
+    {
+      "id": "roblox",
+      "name": "roblox",
+      "price": 999,
+      "damage": 999
+    }
   ]
 }

@@ -62,13 +62,14 @@ export const EMPTY_PLAYER_PROGRESS: TPlayerProgress = {
     pets: null,
     selected: {
         skin: null,
-        pets: ['default'],
+        // pets: ['default', 'default1', 'default2', 'default3', 'default4', 'default5', 'default6'],
+        pets: ['default', 'default1', 'default2',],
         pickaxe: 'default',
         gadgets: []
     },
     gadgets: null,
     pickaxes: null,
-    biomes: ['forest'],
+    biomes: ['Forest Biome', 'Desert Biome'],
     skin: null,
     openSlotPets: 3,
 }

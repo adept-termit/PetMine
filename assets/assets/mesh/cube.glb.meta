@@ -5,6 +5,22 @@
   "uuid": "180e1a53-2b8e-4cd2-b146-5b8eb742f592",
   "files": [],
   "subMetas": {
+    "9d327": {
+      "importer": "gltf-scene",
+      "uuid": "180e1a53-2b8e-4cd2-b146-5b8eb742f592@9d327",
+      "displayName": "",
+      "id": "9d327",
+      "name": "Cube.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
     "2f6d1": {
       "importer": "gltf-mesh",
       "uuid": "180e1a53-2b8e-4cd2-b146-5b8eb742f592@2f6d1",
@@ -41,12 +57,12 @@
       ],
       "subMetas": {}
     },
-    "9d327": {
+    "29adf": {
       "importer": "gltf-scene",
-      "uuid": "180e1a53-2b8e-4cd2-b146-5b8eb742f592@9d327",
+      "uuid": "180e1a53-2b8e-4cd2-b146-5b8eb742f592@29adf",
       "displayName": "",
-      "id": "9d327",
-      "name": "Cube.prefab",
+      "id": "29adf",
+      "name": "cube.prefab",
       "userData": {
         "gltfIndex": 0
       },
@@ -87,7 +103,7 @@
       "textures": [],
       "materials": [],
       "scenes": [
-        "180e1a53-2b8e-4cd2-b146-5b8eb742f592@9d327"
+        "180e1a53-2b8e-4cd2-b146-5b8eb742f592@29adf"
       ]
     }
   }

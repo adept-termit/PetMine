@@ -34,6 +34,14 @@
       {
         "index": 9,
         "name": "TRIGGER_DESTRUCTION_ITEM"
+      },
+      {
+        "index": 10,
+        "name": "CRAFTING_PLATFORM"
+      },
+      {
+        "index": 11,
+        "name": "PLANE_ITEM"
       }
     ],
     "collisionMatrix": {
@@ -43,10 +51,12 @@
       "3": 6,
       "4": 2,
       "5": 32,
-      "6": 640,
+      "6": 1664,
       "7": 64,
       "8": 2,
-      "9": 64
+      "9": 64,
+      "10": 64,
+      "11": 0
     }
   }
 }

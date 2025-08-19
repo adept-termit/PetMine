@@ -55,15 +55,16 @@ export class Character extends Component {
      */
     private async loadPickaxeStats(pickaxeId: string) {
 
-        const pickaxeData = await loadJson<{ skins: Skin[] }>('pickaxes/pickaxeData');// Загружаем данные о кирках из JSON
-        const pickaxeList = pickaxeData.skins;
-
-        // Преобразуем массив в объект для быстрого доступа по ID
-        for (const skin of pickaxeList) {
-            this.pickaxeStatsMap[skin.id] = skin;
-        }
-
-        this.currentPickaxeDamage = this.pickaxeStatsMap[pickaxeId]?.damage ?? 0;
+        // const pickaxeData = await loadJson<{ skins: Skin[] }>('pickaxes/pickaxeData');// Загружаем данные о кирках из JSON
+        // const pickaxeList = pickaxeData.skins;
+        //
+        // // Преобразуем массив в объект для быстрого доступа по ID
+        // for (const skin of pickaxeList) {
+        //     this.pickaxeStatsMap[skin.id] = skin;
+        // }
+        //
+        // this.currentPickaxeDamage = this.pickaxeStatsMap[pickaxeId]?.damage ?? 0;
+        this.currentPickaxeDamage = 100;
     }
 
 

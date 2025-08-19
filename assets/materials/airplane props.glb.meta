@@ -1,0 +1,132 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "6a7632fa-8065-4c70-b9e8-ad5f9784f498",
+  "files": [],
+  "subMetas": {
+    "129f3": {
+      "importer": "gltf-mesh",
+      "uuid": "6a7632fa-8065-4c70-b9e8-ad5f9784f498@129f3",
+      "displayName": "",
+      "id": "129f3",
+      "name": "Canister.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 138
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "56b89": {
+      "importer": "gltf-mesh",
+      "uuid": "6a7632fa-8065-4c70-b9e8-ad5f9784f498@56b89",
+      "displayName": "",
+      "id": "56b89",
+      "name": "Seat.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 360
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c1cc7": {
+      "importer": "gltf-mesh",
+      "uuid": "6a7632fa-8065-4c70-b9e8-ad5f9784f498@c1cc7",
+      "displayName": "",
+      "id": "c1cc7",
+      "name": "Screw.mesh",
+      "userData": {
+        "gltfIndex": 2,
+        "triangleCount": 230
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3de1a": {
+      "importer": "gltf-mesh",
+      "uuid": "6a7632fa-8065-4c70-b9e8-ad5f9784f498@3de1a",
+      "displayName": "",
+      "id": "3de1a",
+      "name": "Wing.mesh",
+      "userData": {
+        "gltfIndex": 3,
+        "triangleCount": 42
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d658f": {
+      "importer": "gltf-scene",
+      "uuid": "6a7632fa-8065-4c70-b9e8-ad5f9784f498@d658f",
+      "displayName": "",
+      "id": "d658f",
+      "name": "airplane props.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "6a7632fa-8065-4c70-b9e8-ad5f9784f498@129f3",
+        "6a7632fa-8065-4c70-b9e8-ad5f9784f498@56b89",
+        "6a7632fa-8065-4c70-b9e8-ad5f9784f498@c1cc7",
+        "6a7632fa-8065-4c70-b9e8-ad5f9784f498@3de1a"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "6a7632fa-8065-4c70-b9e8-ad5f9784f498@d658f"
+      ]
+    }
+  }
+}

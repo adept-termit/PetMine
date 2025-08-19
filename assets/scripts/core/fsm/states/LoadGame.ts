@@ -12,6 +12,11 @@ import {blockProvider} from "db://assets/scripts/biomes/BlockProvider";
 import {DynamiteItem} from "db://assets/scripts/ui/inventory/item/DynamiteItem";
 import {inventoryManager} from "db://assets/scripts/ui/inventory/inventoryManager";
 import {gameFactory} from "db://assets/scripts/core/utils/GameFactory";
+import {getComponent} from "@cocos/creator-types/editor/packages/scene/@types/cce/utils/dump";
+import {RootCanvasUi} from "db://assets/scripts/ui/RootCanvasUI";
+import {PickAxeTabUI} from "db://assets/scripts/ui/PickAxeTabUI";
+import {Skin} from "db://assets/scripts/biomes/WorldData";
+import {globalData, PickData} from "db://assets/scripts/GlobalData";
 
 export class LoadGame implements IState {
     private gameManager: GameManager;
@@ -25,11 +30,23 @@ export class LoadGame implements IState {
     }
 
     async onEnter() {
-        await this._loadBiome();
+
+        //TODO: вынести в авейт метод который за раз будет грузить все Json
+        // const pickaxeData = await loadJson<{ data: PickData[] }>('pickaxes/pickaxeData');
+        // const pickaxeList = pickaxeData.data;
+        //
+        // const pickaxeStatsMap = {};
+        // for (const skin of pickaxeList) {
+        //     pickaxeStatsMap[skin.id] = skin;
+        // }
+
+        // globalData.pickaxeStats = pickaxeStatsMap;
+
+        // await this._loadBiome();
         await this._createCharacter();
-        await this._createPets();
-        await this._createProps();
-        await this._createUI();
+        // await this._createPets();
+        // await this._createProps();
+        // await this._createUI();
     }
 
     public onExit() {
@@ -41,7 +58,8 @@ export class LoadGame implements IState {
 
         await character.init();
 
-        this.characterNode.setPosition(new Vec3(7, 2, 7));
+        // this.characterNode.setPosition(new Vec3(7, 2, 7));
+        this.characterNode.setPosition(new Vec3(0,2,0));
         this._scene.addChild(this.characterNode);
 
         this.gameManager.cameraNode.getComponent(orbit).focusEntity = this.characterNode;
@@ -91,9 +109,15 @@ export class LoadGame implements IState {
     }
 
     private async _createUI() {
-        const hud = await loadAndInstantiatePrefab(`ui/HUD`);
-        this._scene.getChildByName('Canvas').addChild(hud);
-        // this._scene.addChild(hud);
+        const canvasNodeUI = await loadAndInstantiatePrefab(`ui/UI Root Canvas`);
+        const uiRootCanvas = canvasNodeUI.getComponent(RootCanvasUi);
+        const pickaxeTab = uiRootCanvas.pickaxeTab.getComponent(PickAxeTabUI);
+
+        // pickaxeTab.init();
+        //
+        // console.log(uiRootCanvas)
+        // this._scene.getChildByName('Canvas').addChild(hud);
+        // this._scene.addChild(uiRootCanvas);
     }
 }
 

@@ -1,7 +1,7 @@
 import {
     _decorator, Component, Node, Vec3, Quat,
     input, Input, EventKeyboard, KeyCode,
-    Collider, ITriggerEvent, PhysicsSystem, EPhysicsDrawFlags,
+    Collider, ITriggerEvent,
 } from 'cc';
 import { PartPhysics } from 'db://assets/scenes/PartPhysics';
 
@@ -72,20 +72,13 @@ export class PlaneController extends Component {
     private recoverT = 0;            // таймер восстановления
 
     private asd =0;
-
-    private initialY = 0;
     // ===== LIFECYCLE =====
     onLoad() {
-        // включай при надобности
-        PhysicsSystem.instance.debugDrawFlags = EPhysicsDrawFlags.WIRE_FRAME | EPhysicsDrawFlags.AABB;
-
-
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         input.on(Input.EventType.KEY_UP,   this.onKeyUp,   this);
 
         this.asd = this.node.position.y
         console.log(this.asd)
-        this.initialY = this.node.worldPosition.y;
     }
     onDestroy() {
         input.off(Input.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -154,15 +147,8 @@ export class PlaneController extends Component {
     // --- пересчёт forward/right
     private updateBasis() {
         const rot = this.node.getWorldRotation();
-        Vec3.transformQuat(this.forward, new Vec3(0,0,-1), rot);
-        // убираем паразитный Y от (yaw+roll)
-        this.forward.y = 0;
-        this.forward.normalize();
-
-        // right как перпендикуляр в XZ
-        this.right.set(this.forward.z, 0, -this.forward.x);
-        this.right.normalize();
-
+        Vec3.transformQuat(this.forward, new Vec3(0,0,-1), rot); this.forward.normalize();
+        Vec3.transformQuat(this.right,   new Vec3(1,0, 0), rot); this.right.normalize();
     }
 
     // --- проигрываем S-кривую импульса: плавный подъём → плавный отпуск
@@ -193,9 +179,15 @@ export class PlaneController extends Component {
 
         // затухание добавочной скорости
         Vec3.multiplyScalar(this.extraVel, this.extraVel, this.linearDamp);
-
-        this.extraVel.y = 0; // НИКОГДА не даём импульсу тянуть по Y
     }
+
+    // --- перемещение
+    // private move(dt: number) {
+    //     const p = this.node.worldPosition;
+    //     Vec3.scaleAndAdd(this.nextPos, p, this.forward, this.currentSpeed * dt); // тяга
+    //     Vec3.scaleAndAdd(this.nextPos, this.nextPos, this.extraVel, dt);         // отскок
+    //     this.node.setWorldPosition(this.nextPos);
+    // }
 
     private move(dt: number) {
         const p = this.node.worldPosition;

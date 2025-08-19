@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3, Quat, math } from 'cc';
+import {_decorator, Component, Node, Vec3, Quat, math, Collider, ITriggerEvent} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('FollowCamera')
@@ -7,7 +7,7 @@ export class FollowCamera extends Component {
     target: Node | null = null;
 
     @property(Vec3)
-    localOffset: Vec3 = new Vec3(0, 5, -10);
+    localOffset: Vec3 = new Vec3(0, 4.5, 15);
 
     private targetWorldPos = new Vec3();
     private offsetWorld = new Vec3();
